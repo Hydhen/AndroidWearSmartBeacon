@@ -6,7 +6,7 @@ import android.widget.Toast;
 import com.google.android.gms.wearable.WearableListenerService;
 
 /**
- * Created by bourdi_bay on 01/02/2015.
+ * Should be implemented by listeners which exchange message with MessageSender.
  */
 public class BaseListenerService extends WearableListenerService {
     protected MessageSender _messageSender = null;

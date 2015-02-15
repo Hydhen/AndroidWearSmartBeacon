@@ -5,13 +5,20 @@ import com.smartcl.communicationlibrary.BaseListenerService;
 
 
 /**
- * Created by bourdi_bay on 31/01/2015.
+ * Listener which gets messages from the handheld device.
  */
 public class ListenerService extends BaseListenerService {
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
+
+        // TODO: check format
         showToast(messageEvent.getPath());
+
+        //TODO: if question, send if as parameter to the trigger notification (reuqire refactoring).
+        NotificationsTrigger.TriggerNotification(this);
+
+
     }
 
 }

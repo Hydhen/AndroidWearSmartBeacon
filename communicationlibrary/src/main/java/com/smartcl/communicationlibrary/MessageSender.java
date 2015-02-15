@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by bourdi_bay on 31/01/2015.
+ * Send a message between the handheld device and th wearable device.
  */
 public class MessageSender {
     private static final long CONNECTION_TIME_OUT = 2; // seconds
@@ -61,10 +61,9 @@ public class MessageSender {
     }
 
     /**
-     * Send a message to the connected mobile device.
+     * Send a message to the connected handheld device.
      */
-    public void sendMessage(final String message) {
-
+    public void sendMessage(final String message, final byte[] data) {
         // Ensure we finished to try to get the nodeID first.
         if (_retrieveDeviceNodeThread != null) {
             try {
@@ -79,12 +78,16 @@ public class MessageSender {
                 @Override
                 public void run() {
                     _client.blockingConnect(CONNECTION_TIME_OUT, TimeUnit.SECONDS);
-                    Wearable.MessageApi.sendMessage(_client, _nodeId, message, null);
+                    Wearable.MessageApi.sendMessage(_client, _nodeId, message, data);
                     _client.disconnect();
                 }
             });
             _messageThread.start();
         }
+    }
+
+    public void sendMessage(final String message) {
+        sendMessage(message, null);
     }
 
     public void waitForAllThreadsToFinish() {

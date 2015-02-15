@@ -14,7 +14,12 @@ import com.smartcl.communicationlibrary.MessageSender;
 
 
 /**
- * Created by bourdi_bay on 31/01/2015.
+ * Main activity of the wearable application.
+ * It starts the smartbeacons scanner service
+ * and provides a button to stop this service.
+ * <p/>
+ * This activity is necessary because the RECEIVE_BOOT_COMPLETED property
+ * does not work if we did not run an application's activity at least once.
  */
 public class MainActivity extends Activity {
 
