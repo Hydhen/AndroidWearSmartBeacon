@@ -9,7 +9,6 @@ import com.smartcl.communicationlibrary.MessageSender;
 
 import org.json.simple.JSONObject;
 
-import java.nio.charset.Charset;
 import java.util.List;
 
 import eu.smartbeacon.sdk.core.SBBeacon;
@@ -79,8 +78,7 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
     public void onEnteredBeacons(List<SBBeacon> sbBeacons) {
         for (SBBeacon beacon : sbBeacons) {
             JSONObject json = buildJsonObjectFromBeacon(beacon);
-            _messageSender.sendMessage(BEACON_ENTERED_PATH,
-                                       json.toString().getBytes(Charset.forName("UTF-8")));
+            _messageSender.sendMessage(BEACON_ENTERED_PATH, json);
             Toast.makeText(this, "Beacon enter", Toast.LENGTH_SHORT).show();
         }
     }

@@ -11,8 +11,6 @@ import com.smartcl.communicationlibrary.MessageSender;
 
 import org.json.simple.JSONObject;
 
-import java.nio.charset.Charset;
-
 /**
  * Activity displayed in a notification when we detect a smartbeacon.
  * This activity displays a question and sends the answer to the handheld device.
@@ -66,8 +64,7 @@ public class NotificationActivity extends Activity {
         JSONObject json = new JSONObject();
         json.put("answer", answer);
         json.put("question", question);
-        _messageSender.sendMessage(QUESTION_ANSWER_PATH,
-                                   json.toString().getBytes(Charset.forName("UTF-8")));
+        _messageSender.sendMessage(QUESTION_ANSWER_PATH, json);
     }
 
 }

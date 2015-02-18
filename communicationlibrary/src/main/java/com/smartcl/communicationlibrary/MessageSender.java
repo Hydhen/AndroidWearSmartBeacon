@@ -8,6 +8,9 @@ import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 
+import org.json.simple.JSONObject;
+
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -63,7 +66,7 @@ public class MessageSender {
     /**
      * Send a message to the connected handheld device.
      */
-    public void sendMessage(final String message, final byte[] data) {
+    public void sendMessage(final String message, final JSONObject json) {
         // Ensure we finished to try to get the nodeID first.
         if (_retrieveDeviceNodeThread != null) {
             try {
@@ -78,7 +81,12 @@ public class MessageSender {
                 @Override
                 public void run() {
                     _client.blockingConnect(CONNECTION_TIME_OUT, TimeUnit.SECONDS);
-                    Wearable.MessageApi.sendMessage(_client, _nodeId, message, data);
+                    if (json != null) {
+                        Wearable.MessageApi.sendMessage(_client, _nodeId, message, json.toString()
+                                .getBytes(Charset.forName("UTF-8")));
+                    } else {
+                        Wearable.MessageApi.sendMessage(_client, _nodeId, message, null);
+                    }
                     _client.disconnect();
                 }
             });

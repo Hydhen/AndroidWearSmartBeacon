@@ -20,12 +20,19 @@ public class NotificationsTrigger {
         //TODO: get the question from the parameters
         Notification questionNotif = buildQuestionNotification(packageContext, "Question ??");
 
+        Intent websiteIntent = new Intent(packageContext, WebsiteIntentService.class);
+        PendingIntent websitePendingIntent = PendingIntent
+                .getService(packageContext, 0, websiteIntent, 0);
+
         //TODO: put the string in string.xml file
         Notification notification =
                 new NotificationCompat.Builder(packageContext)
                         .setSmallIcon(R.drawable.ic_full_sad)
                         .setContentTitle("Title")
                         .setContentText("Swipe to the right!")
+                        .addAction(R.drawable.ic_launcher,
+                                   packageContext.getString(R.string.open_lcl_website_title),
+                                   websitePendingIntent)
                         .extend(new NotificationCompat.WearableExtender().addPage(questionNotif))
                         .setVibrate(new long[]{1000, 1000})
                         .build();

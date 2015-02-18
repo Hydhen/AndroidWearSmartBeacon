@@ -1,5 +1,8 @@
 package com.smartcl.androidwearsmartbeacon;
 
+import android.content.Intent;
+import android.net.Uri;
+
 import com.google.android.gms.wearable.MessageEvent;
 import com.smartcl.communicationlibrary.BaseListenerService;
 
@@ -18,6 +21,7 @@ public class ListenerService extends BaseListenerService {
 
     public static final String BEACON_ENTERED_PATH = "/beacon/entered/";
     public static final String QUESTION_ANSWER_PATH = "/question/answer/";
+    public static final String WEBSITE_OPEN_PATH = "/website/open/lcl/";
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
@@ -29,7 +33,11 @@ public class ListenerService extends BaseListenerService {
             case QUESTION_ANSWER_PATH:
                 getAnswer(messageEvent);
                 break;
+            case WEBSITE_OPEN_PATH:
+                openWebsite(messageEvent);
+                break;
             default:
+                showToast("Unknown message:" + path);
                 break;
         }
     }
@@ -46,8 +54,8 @@ public class ListenerService extends BaseListenerService {
 
     private void beaconHasEntered(MessageEvent messageEvent) {
         JSONObject json = extractJsonFromMessage(messageEvent);
-        long major = (long) json.get("major");
-        long minor = (long) json.get("minor");
+        final long major = (long) json.get("major");
+        final long minor = (long) json.get("minor");
 
         final String message = messageEvent.getPath() + "Major[" + major + "]Minor[" + minor + "]";
         showToast(message);
@@ -56,6 +64,15 @@ public class ListenerService extends BaseListenerService {
         // TODO: send question
 
         _messageSender.sendMessage(message);
+    }
+
+    private void openWebsite(MessageEvent messageEvent) {
+        JSONObject json = extractJsonFromMessage(messageEvent);
+        final String path = (String) json.get("path");
+
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(path));
+        browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(browserIntent);
     }
 
     private JSONObject extractJsonFromMessage(MessageEvent messageEvent) {

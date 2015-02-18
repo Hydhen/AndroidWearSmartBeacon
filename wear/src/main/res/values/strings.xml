@@ -7,4 +7,6 @@
 
     <string name="title_activity_notif">NotifActivity</string>
 
+    <string name="open_lcl_website_title">Open LCL website</string>
+
 </resources>
