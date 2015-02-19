@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidWearSmartBeacon.iml" filepath="$PROJECT_DIR$/AndroidWearSmartBeacon.iml" />
       <module fileurl="file://$PROJECT_DIR$/communicationlibrary/communicationlibrary.iml" filepath="$PROJECT_DIR$/communicationlibrary/communicationlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobile/mobile.iml" filepath="$PROJECT_DIR$/mobile/mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/volley/volley.iml" filepath="$PROJECT_DIR$/volley/volley.iml" />
       <module fileurl="file://$PROJECT_DIR$/wear/wear.iml" filepath="$PROJECT_DIR$/wear/wear.iml" />
     </modules>
   </component>

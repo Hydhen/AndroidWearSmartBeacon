@@ -1,1 +1,1 @@
-include ':mobile', ':wear', ':communicationlibrary'
+include ':mobile', ':wear', ':communicationlibrary', ':volley'

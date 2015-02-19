@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/communicationlibrary" />
             <option value="$PROJECT_DIR$/mobile" />
+            <option value="$PROJECT_DIR$/volley" />
             <option value="$PROJECT_DIR$/wear" />
           </set>
         </option>

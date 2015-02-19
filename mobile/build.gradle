@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile files('libs/json-simple-1.1.1.jar')
     compile project(':communicationlibrary')
+    compile project(':volley')
 }
