@@ -3,7 +3,11 @@ package com.smartcl.communicationlibrary;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
+
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  * Should be implemented by listeners which exchange message with MessageSender.
@@ -33,4 +37,11 @@ public class BaseListenerService extends WearableListenerService {
         });
     }
 
+    protected JSONObject extractJsonFromMessage(MessageEvent messageEvent) {
+        final byte[] data = messageEvent.getData();
+        final String strData = new String(data);
+
+        JSONObject json = (JSONObject) JSONValue.parse(strData);
+        return json;
+    }
 }

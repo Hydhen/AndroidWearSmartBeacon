@@ -64,6 +64,9 @@ public class NotificationActivity extends Activity {
         JSONObject json = new JSONObject();
         json.put("answer", answer);
         json.put("question", question);
+
+        //TODO: get name
+        json.put("name", "Olivier");
         _messageSender.sendMessage(QUESTION_ANSWER_PATH, json);
     }
 

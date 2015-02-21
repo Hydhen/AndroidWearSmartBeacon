@@ -19,20 +19,14 @@ public class NetworkOperation {
         _queue = Volley.newRequestQueue(context);
     }
 
-    static String getApiUrl() {
+    static protected String getApiUrl() {
         return "http://ec2-54-93-111-136.eu-central-1.compute.amazonaws.com:21996/";
     }
 
-    public static String getAskQuestionUrl() {
-        return getApiUrl() + "question/ask?status=student";
-    }
-
-    public void operationGet(final String url, Response.Listener correctResponseListener,
-                             Response.ErrorListener errorResponseListener) {
+    public void operationGet(final String url, NetworkAnswer answer) {
 
         StringRequest request = new StringRequest(Request.Method.GET, url,
-                                                        correctResponseListener,
-                                                        errorResponseListener);
+                                                  answer, answer);
         _queue.add(request);
     }
 }

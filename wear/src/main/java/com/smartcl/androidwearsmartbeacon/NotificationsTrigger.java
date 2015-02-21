@@ -15,10 +15,10 @@ import android.support.v4.app.NotificationManagerCompat;
  */
 public class NotificationsTrigger {
 
-    public static void TriggerNotification(Context packageContext) {
+    public static void TriggerNotification(Context packageContext, String question) {
 
         //TODO: get the question from the parameters
-        Notification questionNotif = buildQuestionNotification(packageContext, "Question ??");
+        Notification questionNotif = buildQuestionNotification(packageContext, question);
 
         Intent websiteIntent = new Intent(packageContext, WebsiteIntentService.class);
         PendingIntent websitePendingIntent = PendingIntent

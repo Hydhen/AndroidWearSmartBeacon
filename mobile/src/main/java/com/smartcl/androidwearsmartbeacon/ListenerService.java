@@ -3,13 +3,13 @@ package com.smartcl.androidwearsmartbeacon;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.android.gms.wearable.MessageEvent;
 import com.smartcl.communicationlibrary.BaseListenerService;
 
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
+
+import static com.smartcl.androidwearsmartbeacon.NetworkOperation.getApiUrl;
 
 
 /**
@@ -24,9 +24,7 @@ public class ListenerService extends BaseListenerService {
     public static final String BEACON_ENTERED_PATH = "/beacon/entered/";
     public static final String QUESTION_ANSWER_PATH = "/question/answer/";
     public static final String WEBSITE_OPEN_PATH = "/website/open/lcl/";
-
-    public static final String GET_USER_INFO_URL
-            = "http://ec2-54-93-111-136.eu-central-1.compute.amazonaws.com:21996/user/signin";
+    public static final String QUESTION_QUESTION_PATH = "/question/question";
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
@@ -50,11 +48,15 @@ public class ListenerService extends BaseListenerService {
     private void getAnswer(MessageEvent messageEvent) {
         JSONObject json = extractJsonFromMessage(messageEvent);
         final String answer = (String) json.get("answer");
+        final String question = (String) json.get("question");
+        final String name = (String) json.get("name");
 
         final String message = messageEvent.getPath() + "Answer[" + answer + "]";
         showToast(message);
 
-        // TODO: Perform actions like network requests, etc...
+        NetworkOperation network = new NetworkOperation(this);
+        NetworkAnswerGetAnswer networkAnswerGetAnswer = new NetworkAnswerGetAnswer(network);
+        network.operationGet(networkAnswerGetAnswer.getAnswerUrl(question, name, answer), networkAnswerGetAnswer);
     }
 
     private void beaconHasEntered(MessageEvent messageEvent) {
@@ -65,25 +67,10 @@ public class ListenerService extends BaseListenerService {
         final String message = messageEvent.getPath() + "Major[" + major + "]Minor[" + minor + "]";
         showToast(message);
 
-        // TODO: Perform actions like network requests, etc...
-        // TODO: send question
-        //TEST
-
         NetworkOperation network = new NetworkOperation(this);
-        network.operationGet(NetworkOperation.getAskQuestionUrl(),
-                             new Response.Listener() {
-                                 @Override
-                                 public void onResponse(Object o) {
-                                     showToast("ON RESONSE");
-                                 }
-                             },
-                             new Response.ErrorListener() {
-                                 @Override
-                                 public void onErrorResponse(VolleyError error) {
-                                     showToast("ON ERROR RESONSE");
-                                 }
-                             });
-        _messageSender.sendMessage(message);
+        NetworkAnswerStudentInfo networkAnswerStudentInfo = new NetworkAnswerStudentInfo(network);
+        network.operationGet(networkAnswerStudentInfo.getSignInUrl("Olivier"),
+                             networkAnswerStudentInfo);
     }
 
     private void openWebsite(MessageEvent messageEvent) {
@@ -95,11 +82,90 @@ public class ListenerService extends BaseListenerService {
         startActivity(browserIntent);
     }
 
-    private JSONObject extractJsonFromMessage(MessageEvent messageEvent) {
-        final byte[] data = messageEvent.getData();
-        final String strData = new String(data);
+    class NetworkAnswerStudentInfo extends NetworkAnswer {
 
-        JSONObject json = (JSONObject) JSONValue.parse(strData);
-        return json;
+        public NetworkAnswerStudentInfo(NetworkOperation network) {
+            super(network);
+        }
+
+        public String getSignInUrl(String name) {
+            return getApiUrl() + "user/signin?name=" + name;
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            showToast("FAIL");
+        }
+
+        @Override
+        public void onResponse(Object response) {
+            showToast("COUCOU ca marche: get status");
+            super.onResponse(response);
+        }
+
+        @Override
+        public void run(Object response) {
+
+            //TODO: get status
+//            JSONObject json = (JSONObject) response;
+//            String status = (String) json.get("status");
+            final String status = "student";
+//            showToast("Status=" + status);
+
+            NetworkAnswerGetQuestion networkAnswerGetQuestion = new NetworkAnswerGetQuestion(
+                    _network);
+            _network.operationGet(networkAnswerGetQuestion.getQuestionUrl(status),
+                                  networkAnswerGetQuestion);
+        }
     }
+
+    class NetworkAnswerGetQuestion extends NetworkAnswer {
+
+        public NetworkAnswerGetQuestion(NetworkOperation network) {
+            super(network);
+        }
+
+        public String getQuestionUrl(String status) {
+            return getApiUrl() + "question/ask?status=" + status;
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            showToast("FAIL question");
+        }
+
+        @Override
+        public void onResponse(Object response) {
+            showToast("COUCOU ca marche: get question");
+            final String question = "Question gotten !";
+
+            JSONObject json = new JSONObject();
+            json.put("question", question);
+            _messageSender.sendMessage(QUESTION_QUESTION_PATH, json);
+        }
+    }
+
+
+    class NetworkAnswerGetAnswer extends NetworkAnswer {
+
+        public NetworkAnswerGetAnswer(NetworkOperation network) {
+            super(network);
+        }
+
+        public String getAnswerUrl(String title, String name, String answer) {
+            return getApiUrl() + "question/answer?title=" + title + "&name=" + name + "&answer=" +
+                    answer;
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            showToast("FAIL question asnwer");
+        }
+
+        @Override
+        public void onResponse(Object response) {
+            showToast("COUCOU ca marche: answer");
+        }
+    }
+
 }
