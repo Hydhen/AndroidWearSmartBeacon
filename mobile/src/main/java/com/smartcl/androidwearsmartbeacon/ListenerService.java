@@ -2,8 +2,6 @@ package com.smartcl.androidwearsmartbeacon;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -70,26 +68,21 @@ public class ListenerService extends BaseListenerService {
         // TODO: Perform actions like network requests, etc...
         // TODO: send question
         //TEST
-        /*
+
         NetworkOperation network = new NetworkOperation(this);
-        network.operationGet(GET_USER_INFO_URL + "?name=Olivier",
-                             new Response.Listener<org.json.JSONObject>() {
+        network.operationGet(NetworkOperation.getAskQuestionUrl(),
+                             new Response.Listener() {
                                  @Override
-                                 public void onResponse(org.json.JSONObject response) {
-                                     Log.d("DEBUG", response.toString());
-                                     Toast.makeText(ListenerService.this, "on response",
-                                                    Toast.LENGTH_SHORT).show();
+                                 public void onResponse(Object o) {
+                                     showToast("ON RESONSE");
                                  }
                              },
                              new Response.ErrorListener() {
-
                                  @Override
                                  public void onErrorResponse(VolleyError error) {
-                                     Toast.makeText(ListenerService.this, "on ERROR response",
-                                                    Toast.LENGTH_SHORT).show();
+                                     showToast("ON ERROR RESONSE");
                                  }
                              });
-*/
         _messageSender.sendMessage(message);
     }
 
