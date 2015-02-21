@@ -27,10 +27,10 @@ public class NotificationsTrigger {
         //TODO: put the string in string.xml file
         Notification notification =
                 new NotificationCompat.Builder(packageContext)
-                        .setSmallIcon(R.drawable.ic_full_sad)
+                        .setSmallIcon(R.drawable.icon_ad)
                         .setContentTitle("Title")
                         .setContentText("Swipe to the right!")
-                        .addAction(R.drawable.ic_launcher,
+                        .addAction(R.drawable.icon_ad,
                                    packageContext.getString(R.string.open_lcl_website_title),
                                    websitePendingIntent)
                         .extend(new NotificationCompat.WearableExtender().addPage(questionNotif))

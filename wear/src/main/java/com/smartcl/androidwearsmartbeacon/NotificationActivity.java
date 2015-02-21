@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.smartcl.communicationlibrary.MessageSender;
@@ -41,14 +41,14 @@ public class NotificationActivity extends Activity {
 
         _messageSender = new MessageSender(NotificationActivity.this);
 
-        Button btYes = (Button) stub.findViewById(R.id.button_yes);
+        ImageButton btYes = (ImageButton) stub.findViewById(R.id.button_yes);
         btYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendAnswer("Yes");
             }
         });
-        Button btNo = (Button) stub.findViewById(R.id.button_no);
+        ImageButton btNo = (ImageButton) stub.findViewById(R.id.button_no);
         btNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

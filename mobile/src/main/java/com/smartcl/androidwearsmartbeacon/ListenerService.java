@@ -56,7 +56,8 @@ public class ListenerService extends BaseListenerService {
 
         NetworkOperation network = new NetworkOperation(this);
         NetworkAnswerGetAnswer networkAnswerGetAnswer = new NetworkAnswerGetAnswer(network);
-        network.operationGet(networkAnswerGetAnswer.getAnswerUrl(question, name, answer), networkAnswerGetAnswer);
+        network.operationGet(networkAnswerGetAnswer.getAnswerUrl(question, name, answer),
+                             networkAnswerGetAnswer);
     }
 
     private void beaconHasEntered(MessageEvent messageEvent) {
@@ -99,18 +100,21 @@ public class ListenerService extends BaseListenerService {
 
         @Override
         public void onResponse(Object response) {
-            showToast("COUCOU ca marche: get status");
+            showToast("It works: get status");
             super.onResponse(response);
         }
 
         @Override
         public void run(Object response) {
 
+//            JSONParser parser = new JSONParser();
+//                Object obj = parser.parse((String) response);
+
+//                JSONObject json = (JSONObject) obj;
             //TODO: get status
-//            JSONObject json = (JSONObject) response;
 //            String status = (String) json.get("status");
+//                showToast("Status=" + status);
             final String status = "student";
-//            showToast("Status=" + status);
 
             NetworkAnswerGetQuestion networkAnswerGetQuestion = new NetworkAnswerGetQuestion(
                     _network);
@@ -136,7 +140,7 @@ public class ListenerService extends BaseListenerService {
 
         @Override
         public void onResponse(Object response) {
-            showToast("COUCOU ca marche: get question");
+            showToast("It works: get question");
             final String question = "Question gotten !";
 
             JSONObject json = new JSONObject();
@@ -159,12 +163,12 @@ public class ListenerService extends BaseListenerService {
 
         @Override
         public void onErrorResponse(VolleyError error) {
-            showToast("FAIL question asnwer");
+            showToast("FAIL question answer");
         }
 
         @Override
         public void onResponse(Object response) {
-            showToast("COUCOU ca marche: answer");
+            showToast("It works: answer");
         }
     }
 
