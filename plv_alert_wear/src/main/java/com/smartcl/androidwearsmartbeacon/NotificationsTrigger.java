@@ -28,8 +28,8 @@ public class NotificationsTrigger {
         Notification notification =
                 new NotificationCompat.Builder(packageContext)
                         .setSmallIcon(R.drawable.icon_ad)
-                        .setContentTitle("Title")
-                        .setContentText("Swipe to the right!")
+                        .setContentTitle(packageContext.getString(R.string.title_activity_notif))
+                        .setContentText(packageContext.getString(R.string.content_activity_notif))
                         .addAction(R.drawable.icon_ad,
                                    packageContext.getString(R.string.open_lcl_website_title),
                                    websitePendingIntent)

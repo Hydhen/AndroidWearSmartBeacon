@@ -7,7 +7,7 @@ import android.content.Intent;
 
 /**
  * Called when the device boots.
- * It start automatically the service which scans the smartbeacons around.
+ * It starts automatically the service which scans the smartbeacons around.
  */
 public class BootReceiver extends BroadcastReceiver {
     public BootReceiver() {

@@ -1,1 +1,1 @@
-include ':mobile', ':wear', ':communicationlibrary', ':volley'
+include ':plv_alert_mobile', ':plv_alert_wear', ':communicationlibrary', ':volley'

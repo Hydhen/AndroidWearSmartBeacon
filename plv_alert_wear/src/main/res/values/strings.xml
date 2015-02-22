@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">AndroidWearSmartBeacon</string>
+    <string name="app_name">PLV_Alert</string>
 
     <string name="welcome">Bienvenue dans l\'application LCL.</string>
     <string name="text_info">Lors de votre passage devant une PLV vous recevrez une notification qui vous demandera si vous voulez davantage d\'information.</string>
     <string name="stop_service">Arrêter le suivi</string>
 
-    <string name="title_activity_notif">NotifActivity</string>
+    <string name="title_activity_notif">Notification</string>
+    <string name="content_activity_notif">Vous êtes passé prêt d\'une PLV LCL. Veuillez aller vers la droite pour avoir plus de détails.</string>
 
     <string name="open_lcl_website_title">Ouvrir le site LCL</string>
 
