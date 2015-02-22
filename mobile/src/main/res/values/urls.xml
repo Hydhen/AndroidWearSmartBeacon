@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="server_url">http://ec2-54-93-111-136.eu-central-1.compute.amazonaws.com:21996/</string>
-</resources>

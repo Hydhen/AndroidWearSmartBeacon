@@ -87,7 +87,7 @@ public class ListenerService extends BaseListenerService {
         }
 
         public String getSignInUrl(String name) {
-            return R.string.server_url + "user/signin?name=" + name;
+            return _network.getApiUrl() + "user/signin?name=" + name;
         }
 
         @Override
@@ -127,7 +127,7 @@ public class ListenerService extends BaseListenerService {
         }
 
         public String getQuestionUrl(String status) {
-            return R.string.server_url + "question/ask?status=" + status;
+            return _network.getApiUrl() + "question/ask?status=" + status;
         }
 
         @Override
@@ -154,7 +154,7 @@ public class ListenerService extends BaseListenerService {
         }
 
         public String getAnswerUrl(String title, String name, String answer) {
-            return R.string.server_url + "question/answer?title=" + title + "&name=" + name +
+            return _network.getApiUrl() + "question/answer?title=" + title + "&name=" + name +
                     "&answer=" +
                     answer;
         }

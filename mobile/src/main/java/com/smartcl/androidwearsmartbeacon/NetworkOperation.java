@@ -19,6 +19,10 @@ public class NetworkOperation {
         _queue = Volley.newRequestQueue(context);
     }
 
+    static protected String getApiUrl() {
+        return "http://ec2-54-93-111-136.eu-central-1.compute.amazonaws.com:21996/";
+    }
+
     public void operationGet(final String url, NetworkAnswer answer) {
 
         StringRequest request = new StringRequest(Request.Method.GET, url,

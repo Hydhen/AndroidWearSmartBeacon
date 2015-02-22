@@ -32,7 +32,7 @@ public class WebsiteIntentService extends IntentService {
 
         _messageSender = new MessageSender(getApplicationContext());
         JSONObject json = new JSONObject();
-        json.put("path", "https://www.google.fr");
+        json.put("path", "https://particuliers.secure.lcl.fr/index.html");
         _messageSender.sendMessage(WEBSITE_OPEN_PATH, json);
     }
 
