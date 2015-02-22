@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.personal.bourdi_b.testandroidwearnotificationpages.NotifActivity"
-                tools:deviceIds="wear_round">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:weightSum="1"
+              tools:context="com.personal.bourdi_b.testandroidwearnotificationpages.NotifActivity"
+              tools:deviceIds="wear_round">
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_round"/>
-</RelativeLayout>
+        android:layout_gravity="center_horizontal"
+        android:text="question"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_weight="0"
+        android:gravity="bottom|center_horizontal"
+        android:orientation="horizontal"
+        >
+
+        <ImageButton
+            android:id="@+id/button_yes"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@null"
+            android:src="@drawable/yes"/>
+
+        <ImageButton
+            android:id="@+id/button_no"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/no"/>
+
+    </LinearLayout>
+
+</LinearLayout>

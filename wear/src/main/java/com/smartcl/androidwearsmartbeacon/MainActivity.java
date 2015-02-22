@@ -23,15 +23,11 @@ import com.smartcl.communicationlibrary.MessageSender;
  */
 public class MainActivity extends Activity {
 
-    private static final String MESSAGE = "This is from the Wear";
-    private MessageSender _messageSender = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        _messageSender = new MessageSender(getApplicationContext());
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
@@ -55,17 +51,6 @@ public class MainActivity extends Activity {
                 stopService(new Intent(MainActivity.this, DiscoverBeaconsService.class));
             }
         });
-
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendMessageToPhone();
-            }
-        });
-    }
-
-    private void sendMessageToPhone() {
-        _messageSender.sendMessage(MESSAGE);
     }
 
     private boolean isMyServiceRunning(Class<?> serviceClass) {
@@ -73,7 +58,7 @@ public class MainActivity extends Activity {
         for (ActivityManager.RunningServiceInfo service : manager
                 .getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
-                Toast.makeText(this, "is running", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Service is running", Toast.LENGTH_SHORT).show();
                 return true;
             }
         }

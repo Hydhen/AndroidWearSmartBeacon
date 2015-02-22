@@ -2,11 +2,13 @@
 <resources>
 
     <string name="app_name">AndroidWearSmartBeacon</string>
-    <string name="hello_round">Hello Round World!</string>
-    <string name="hello_square">Hello Square World!</string>
+
+    <string name="welcome">Bienvenue dans l\'application LCL.</string>
+    <string name="text_info">Lors de votre passage devant une PLV vous recevrez une notification qui vous demandera si vous voulez davantage d\'information.</string>
+    <string name="stop_service">Arrêter le suivi</string>
 
     <string name="title_activity_notif">NotifActivity</string>
 
-    <string name="open_lcl_website_title">Open LCL website</string>
+    <string name="open_lcl_website_title">Ouvrir le site LCL</string>
 
 </resources>
