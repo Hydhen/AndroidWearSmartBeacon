@@ -9,9 +9,6 @@ import com.smartcl.communicationlibrary.BaseListenerService;
 
 import org.json.simple.JSONObject;
 
-import static com.smartcl.androidwearsmartbeacon.NetworkOperation.getApiUrl;
-
-
 /**
  * Listener which reacts to the messages sent by the wearable device.
  * These messages can mean we detected a smartbeacon, or we got an answer from a question.
@@ -90,7 +87,7 @@ public class ListenerService extends BaseListenerService {
         }
 
         public String getSignInUrl(String name) {
-            return getApiUrl() + "user/signin?name=" + name;
+            return R.string.server_url + "user/signin?name=" + name;
         }
 
         @Override
@@ -130,7 +127,7 @@ public class ListenerService extends BaseListenerService {
         }
 
         public String getQuestionUrl(String status) {
-            return getApiUrl() + "question/ask?status=" + status;
+            return R.string.server_url + "question/ask?status=" + status;
         }
 
         @Override
@@ -141,7 +138,7 @@ public class ListenerService extends BaseListenerService {
         @Override
         public void onResponse(Object response) {
             showToast("It works: get question");
-            final String question = "Question gotten !";
+            final String question = "Question gotten ! This is a long question to test if it works well when it's long";
 
             JSONObject json = new JSONObject();
             json.put("question", question);
@@ -157,7 +154,8 @@ public class ListenerService extends BaseListenerService {
         }
 
         public String getAnswerUrl(String title, String name, String answer) {
-            return getApiUrl() + "question/answer?title=" + title + "&name=" + name + "&answer=" +
+            return R.string.server_url + "question/answer?title=" + title + "&name=" + name +
+                    "&answer=" +
                     answer;
         }
 

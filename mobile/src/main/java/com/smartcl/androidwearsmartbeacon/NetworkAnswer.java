@@ -4,7 +4,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 /**
- * Created by bourdi_bay on 21/02/2015.
+ * Get the server answer and run something accordingly.
  */
 public class NetworkAnswer implements Response.Listener, Response.ErrorListener {
 

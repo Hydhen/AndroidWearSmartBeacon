@@ -9,7 +9,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 /**
- * Created by bourdi_b on 19/02/2015.
+ * Perform a server request.
  */
 public class NetworkOperation {
 
@@ -17,10 +17,6 @@ public class NetworkOperation {
 
     public NetworkOperation(Context context) {
         _queue = Volley.newRequestQueue(context);
-    }
-
-    static protected String getApiUrl() {
-        return "http://ec2-54-93-111-136.eu-central-1.compute.amazonaws.com:21996/";
     }
 
     public void operationGet(final String url, NetworkAnswer answer) {
