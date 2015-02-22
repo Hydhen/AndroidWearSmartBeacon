@@ -25,13 +25,18 @@ public class MessageSender {
     private Thread _retrieveDeviceNodeThread = null;
     private Thread _messageThread = null;
 
+    private final Context _context;
+
     /**
      * Initialize the GoogleApiClient and get the Node ID of the connected device.
      */
     public MessageSender(Context context) {
+        _context = context;
         _client = getGoogleApiClient(context);
         retrieveDeviceNode();
     }
+
+    public Context getContext() {return _context;}
 
     private GoogleApiClient getGoogleApiClient(Context context) {
         return new GoogleApiClient.Builder(context)
