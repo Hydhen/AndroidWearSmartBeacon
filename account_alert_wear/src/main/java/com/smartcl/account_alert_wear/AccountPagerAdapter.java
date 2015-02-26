@@ -3,7 +3,6 @@ package com.smartcl.account_alert_wear;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.support.wearable.view.CardFragment;
 import android.support.wearable.view.FragmentGridPagerAdapter;
 
 import java.util.ArrayList;
@@ -30,19 +29,7 @@ public class AccountPagerAdapter extends FragmentGridPagerAdapter {
     @Override
     public Fragment getFragment(int row, int col) {
         AccountPage page = _pages.get(row);
-
-        // TODO: subclass and override onCreateContentView
-        final String title = page.getAccount().getState().toString();
-        final String text = String.valueOf(page.getAccount().getMoney());
-        CardFragment card = CardFragment.create(title, text);
-
-        // Advanced settings (card gravity, card expansion/scrolling)
-        /*
-        fragment.setCardGravity(page.cardGravity);
-        fragment.setExpansionEnabled(page.expansionEnabled);
-        fragment.setExpansionDirection(page.expansionDirection);
-        fragment.setExpansionFactor(page.expansionFactor);
-        */
+        CustomFragment card = CustomFragment.newInstance(page.getAccount());
         return card;
     }
 

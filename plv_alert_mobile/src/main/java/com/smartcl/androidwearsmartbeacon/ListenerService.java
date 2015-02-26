@@ -64,13 +64,14 @@ public class ListenerService extends BaseListenerService {
         JSONObject json = extractJsonFromMessage(messageEvent);
         final long major = (long) json.get("major");
         final long minor = (long) json.get("minor");
+        final String username = (String) json.get("username");
 
         final String message = messageEvent.getPath() + "Major[" + major + "]Minor[" + minor + "]";
         showToast(message);
 
         NetworkOperation network = new NetworkOperation(this);
         NetworkAnswerStudentInfo networkAnswerStudentInfo = new NetworkAnswerStudentInfo(network);
-        network.operationGet(networkAnswerStudentInfo.getSignInUrl("Olivier"),
+        network.operationGet(networkAnswerStudentInfo.getSignInUrl(username),
                              networkAnswerStudentInfo);
     }
 
@@ -106,7 +107,6 @@ public class ListenerService extends BaseListenerService {
 
         @Override
         public void run(Object response) {
-
             JSONObject jsonResponse = (JSONObject) JSONValue.parse((String) response);
             final String status = (String) jsonResponse.get("status");
             showToast("Status=" + status);

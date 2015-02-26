@@ -1,9 +1,11 @@
 package com.smartcl.account_alert_wear;
 
+import java.io.Serializable;
+
 /**
  * Created by bourdi_b on 25/02/2015.
  */
-public class Account {
+public class Account implements Serializable {
     private Long _money;
     private eState _state;
 

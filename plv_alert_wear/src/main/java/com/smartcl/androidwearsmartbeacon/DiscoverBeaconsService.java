@@ -1,10 +1,12 @@
 package com.smartcl.androidwearsmartbeacon;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.widget.Toast;
 
+import com.smartcl.communicationlibrary.LCLPreferences;
 import com.smartcl.communicationlibrary.MessageSender;
 
 import org.json.simple.JSONObject;
@@ -30,8 +32,15 @@ class TimerThreads {
      * @param messageSender The MessageSender instance to send a message to the handheld.
      * @param beacon        The beacon entered.
      */
-    public void queueBeacon(MessageSender messageSender, SBBeacon beacon) {
-        JSONObject json = buildJsonObjectFromBeacon(beacon);
+    public void queueBeacon(Context context, MessageSender messageSender, SBBeacon beacon) {
+        final boolean isPassed = LCLPreferences.GetStatusUser(context);
+        // We send the notification only the first time we detect the beacon.
+        if (isPassed) {
+            // TODO: uncomment this once in production
+//            return;
+        }
+
+        JSONObject json = buildJsonObjectFromBeacon(context, beacon);
 
         // If the thread associated to this beacon is already running,
         // we interrupt it and re-start it right away.
@@ -41,14 +50,14 @@ class TimerThreads {
             final JSONObject jsonObj = entry.getKey();
             if (jsonObj.equals(json)) {
                 entry.getValue().interrupt();
-                entry.setValue(new TimerThread(messageSender, json));
+                entry.setValue(new TimerThread(context, messageSender, json));
                 entry.getValue().start();
                 return;
             }
         }
 
         // Else we add the beacon in the timer list.
-        TimerThread thread = new TimerThread(messageSender, json);
+        TimerThread thread = new TimerThread(context, messageSender, json);
         _timers.put(json, thread);
         thread.start();
     }
@@ -59,8 +68,8 @@ class TimerThreads {
      *
      * @param beacon The beacon that got undetected.
      */
-    public void unqueueBeacon(SBBeacon beacon) {
-        JSONObject json = buildJsonObjectFromBeacon(beacon);
+    public void unqueueBeacon(Context context, SBBeacon beacon) {
+        JSONObject json = buildJsonObjectFromBeacon(context, beacon);
         for (Iterator<Map.Entry<JSONObject, TimerThread>> it = _timers.entrySet().iterator();
              it.hasNext(); ) {
             Map.Entry<JSONObject, TimerThread> entry = it.next();
@@ -73,10 +82,11 @@ class TimerThreads {
         }
     }
 
-    private JSONObject buildJsonObjectFromBeacon(SBBeacon beacon) {
+    private JSONObject buildJsonObjectFromBeacon(Context context, SBBeacon beacon) {
         JSONObject json = new JSONObject();
         json.put("major", beacon.getMajor());
         json.put("minor", beacon.getMinor());
+        json.put("username", LCLPreferences.GetNameUser(context));
         return json;
     }
 
@@ -84,10 +94,12 @@ class TimerThreads {
 
         private JSONObject _json;
         private MessageSender _messageSender;
+        private Context _context;
 
-        public TimerThread(MessageSender messageSender, JSONObject json) {
+        public TimerThread(Context context, MessageSender messageSender, JSONObject json) {
             _messageSender = messageSender;
             _json = json;
+            _context = context;
         }
 
         @Override
@@ -100,6 +112,8 @@ class TimerThreads {
             } catch (InterruptedException ex) {
             }
             _messageSender.sendMessage(BEACON_ENTERED_PATH, _json);
+            // We set the passed boolean to true, so that we can know if the user has already passed next to the beacon.
+            LCLPreferences.SetNameUser(_context, LCLPreferences.GetNameUser(_context), true);
         }
     }
 }
@@ -125,6 +139,15 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
         if (!_isInitialized) {
             _isInitialized = true;
 
+            final boolean isPassed = LCLPreferences.GetStatusUser(this);
+            // We send the notification only the first time we detect the beacon.
+            if (isPassed) {
+                Toast.makeText(this, "We already passed next to this PLV advertising",
+                               Toast.LENGTH_SHORT).show();
+                // TODO: uncomment this once in production
+                //return;
+            }
+
             _messageSender = new MessageSender(getApplicationContext());
             // disable logging message
             SBLogger.setSilentMode(true);
@@ -133,6 +156,8 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
             sbManager.addEntireSBRegion();
             sbManager.addBeaconLocationListener(this);
             sbManager.startMonitoringAllBeaconRegions();
+
+            LCLPreferences.SetNameUser(this, "Olivier");
         }
     }
 
@@ -157,7 +182,7 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
     @Override
     public void onEnteredBeacons(List<SBBeacon> sbBeacons) {
         for (SBBeacon beacon : sbBeacons) {
-            _timerThreads.queueBeacon(_messageSender, beacon);
+            _timerThreads.queueBeacon(this, _messageSender, beacon);
             Toast.makeText(this, "Beacon enter", Toast.LENGTH_SHORT).show();
         }
     }
@@ -165,7 +190,7 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
     @Override
     public void onExitedBeacons(List<SBBeacon> sbBeacons) {
         for (SBBeacon beacon : sbBeacons) {
-            _timerThreads.unqueueBeacon(beacon);
+            _timerThreads.unqueueBeacon(this, beacon);
             Toast.makeText(this, "Beacon exit", Toast.LENGTH_SHORT).show();
         }
     }
