@@ -10,6 +10,7 @@ import com.smartcl.communicationlibrary.NetworkAnswer;
 import com.smartcl.communicationlibrary.NetworkOperation;
 
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  * Listener which reacts to the messages sent by the wearable device.
@@ -106,14 +107,9 @@ public class ListenerService extends BaseListenerService {
         @Override
         public void run(Object response) {
 
-//            JSONParser parser = new JSONParser();
-//                Object obj = parser.parse((String) response);
-
-//                JSONObject json = (JSONObject) obj;
-            //TODO: get status
-//            String status = (String) json.get("status");
-//                showToast("Status=" + status);
-            final String status = "student";
+            JSONObject jsonResponse = (JSONObject) JSONValue.parse((String) response);
+            final String status = (String) jsonResponse.get("status");
+            showToast("Status=" + status);
 
             NetworkAnswerGetQuestion networkAnswerGetQuestion = new NetworkAnswerGetQuestion(
                     _network);
@@ -139,15 +135,13 @@ public class ListenerService extends BaseListenerService {
 
         @Override
         public void onResponse(Object response) {
-            showToast("It works: get question");
-            final String question = "Question gotten ! This is a long question to test if it works well when it's long";
+            showToast("It works: get question " + response);
 
             JSONObject json = new JSONObject();
-            json.put("question", question);
+            json.put("question", response);
             _messageSender.sendMessage(QUESTION_QUESTION_PATH, json);
         }
     }
-
 
     class NetworkAnswerGetAnswer extends NetworkAnswer {
 
@@ -157,8 +151,7 @@ public class ListenerService extends BaseListenerService {
 
         public String getAnswerUrl(String title, String name, String answer) {
             return _network.getApiUrl() + "question/answer?title=" + title + "&name=" + name +
-                    "&answer=" +
-                    answer;
+                    "&answer=" + answer;
         }
 
         @Override
