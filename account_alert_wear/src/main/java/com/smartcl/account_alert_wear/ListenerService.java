@@ -33,13 +33,12 @@ public class ListenerService extends BaseListenerService {
         // TODO: check format
         showToast(messageEvent.getPath());
 
-        final String mockMessage = "{ \"current_account\" : { \"money\" : 41000, \"state\" : \"red\" }, \"history\" : [" +
-                "{ \"money\" : 90000, \"state\" : \"green\" }," +
-                "{ \"money\" : 56000, \"state\" : \"orange\" }," +
-                "{ \"money\" : 30000, \"state\" : \"red\" }] }";
+        final String mockMessage = "{ \"current_account\" : { \"money\" : 41000, \"state\" : \"red\", \"date\" : \"26/02/2015\" }, \"history\" : [" +
+                "{ \"money\" : 90000, \"state\" : \"green\", \"date\" : \"21/02/2015\" }," +
+                "{ \"money\" : 56000, \"state\" : \"orange\", \"date\" : \"15/01/2015\" }," +
+                "{ \"money\" : 30000, \"state\" : \"red\", \"date\" : \"01/12/2015\" }] }";
         JSONObject jsonMocked = (JSONObject) JSONValue.parse(mockMessage);
 
-        //TODO: if question, send if as parameter to the trigger notification (reuqire refactoring).
         NotificationsTrigger.TriggerNotification(this, jsonMocked);
     }
 }

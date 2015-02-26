@@ -1,6 +1,7 @@
 package com.smartcl.account_alert_wear;
 
 import android.app.Activity;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.widget.ImageView;
@@ -33,8 +34,10 @@ public class CurrentAccountActivity extends Activity {
         Account currentAccount = createAccountFromJson(currentAccountJson);
 
         TextView moneyLabel = (TextView) stub.findViewById(R.id.money_label);
-        moneyLabel.setText(currentAccount.getState().toString());
-        ImageView img = (ImageView) stub.findViewById(R.id.imageView);
+        moneyLabel.setText(String.valueOf(currentAccount.getMoney()));
+        TextView dateLabel = (TextView) stub.findViewById(R.id.date);
+        dateLabel.setText(currentAccount.getDate());
+        ImageView img = (ImageView) stub.findViewById(R.id.img);
         switch (currentAccount.getState()) {
             case RED:
                 img.setImageResource(R.drawable.red);
@@ -51,6 +54,7 @@ public class CurrentAccountActivity extends Activity {
     private Account createAccountFromJson(JSONObject accountData) {
         final Long money = (Long) accountData.get("money");
         final String state = (String) accountData.get("state");
-        return new Account(money, state);
+        final String date = (String) accountData.get("date");
+        return new Account(money, state, date);
     }
 }

@@ -9,16 +9,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CustomFragment extends Fragment {
+import org.w3c.dom.Text;
+
+public class CustomAccountFragment extends Fragment {
 
     /**
      * Avoid the issue with the default constructor needed.
      *
      * @param account The account to display.
-     * @return The instance of CustomFragment.
+     * @return The instance of CustomAccountFragment.
      */
-    public static CustomFragment newInstance(Account account) {
-        CustomFragment fragment = new CustomFragment();
+    public static CustomAccountFragment newInstance(Account account) {
+        CustomAccountFragment fragment = new CustomAccountFragment();
         Bundle bundle = fragment.getArguments();
         if (bundle == null) {
             bundle = new Bundle();
@@ -46,8 +48,10 @@ public class CustomFragment extends Fragment {
 
     private void setupWidgets(WatchViewStub stub, Account account) {
         TextView moneyLabel = (TextView) stub.findViewById(R.id.money_label);
-        moneyLabel.setText(account.getState().toString());
-        ImageView img = (ImageView) stub.findViewById(R.id.imageView);
+        moneyLabel.setText(String.valueOf(account.getMoney()));
+        TextView dateLabel = (TextView) stub.findViewById(R.id.date);
+        dateLabel.setText(account.getDate());
+        ImageView img = (ImageView) stub.findViewById(R.id.img);
         switch (account.getState()) {
             case RED:
                 img.setImageResource(R.drawable.red);

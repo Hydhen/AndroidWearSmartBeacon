@@ -20,9 +20,6 @@ import java.util.List;
  */
 public class AccountHistoryActivity extends Activity {
 
-    public static final String QUESTION_ANSWER_PATH = "/question/answer/";
-    private MessageSender _messageSender;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +58,8 @@ public class AccountHistoryActivity extends Activity {
     private Account createAccountFromJson(JSONObject accountData) {
         final Long money = (Long) accountData.get("money");
         final String state = (String) accountData.get("state");
-        return new Account(money, state);
+        final String date = (String) accountData.get("date");
+        return new Account(money, state, date);
     }
 
 }

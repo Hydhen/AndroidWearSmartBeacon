@@ -26,9 +26,9 @@ public class NotificationsTrigger {
                 new NotificationCompat.Builder(packageContext)
                         .setSmallIcon(R.drawable.icon_bank)
                         .setContentTitle("title")
-                        .setContentText("content")
+                        .setContentText("content") //TODO: set content
                         .extend(new NotificationCompat.WearableExtender().addPage(accountNotif))
-                        .addAction(R.drawable.icon_bank, "text", accountHistoryIntent)
+                        .addAction(R.drawable.icon_bank, packageContext.getString(R.string.account_history), accountHistoryIntent)
                         .setVibrate(new long[]{1000, 1000})
                         .build();
 

@@ -8,9 +8,11 @@ import java.io.Serializable;
 public class Account implements Serializable {
     private Long _money;
     private eState _state;
+    private String _date;
 
-    public Account(Long money, String state) {
+    public Account(Long money, String state, String date) {
         _money = money;
+        _date = date;
         switch (state) {
             case "red":
                 _state = eState.RED;
@@ -29,6 +31,7 @@ public class Account implements Serializable {
 
     public Long getMoney() { return _money; }
     public eState getState() { return _state; }
+    public String getDate() { return _date; }
 
     enum eState {
         RED,
