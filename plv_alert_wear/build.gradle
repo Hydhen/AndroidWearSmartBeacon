@@ -6,7 +6,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.smartcl.androidwearsmartbeacon"
+        applicationId "com.smartcl.plv_project"
         minSdkVersion 20
         targetSdkVersion 21
         versionCode 1

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.smartcl.plv_project"
+        applicationId "com.smartcl.account_project"
         minSdkVersion 18
         targetSdkVersion 21
         versionCode 1
@@ -20,8 +20,8 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    wearApp project(':plv_alert_wear')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    wearApp project(':account_alert_wear')
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile files('libs/json-simple-1.1.1.jar')
     compile project(':communicationlibrary')

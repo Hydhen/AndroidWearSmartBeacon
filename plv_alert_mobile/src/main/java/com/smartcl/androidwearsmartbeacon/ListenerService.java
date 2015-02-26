@@ -6,6 +6,8 @@ import android.net.Uri;
 import com.android.volley.VolleyError;
 import com.google.android.gms.wearable.MessageEvent;
 import com.smartcl.communicationlibrary.BaseListenerService;
+import com.smartcl.communicationlibrary.NetworkAnswer;
+import com.smartcl.communicationlibrary.NetworkOperation;
 
 import org.json.simple.JSONObject;
 

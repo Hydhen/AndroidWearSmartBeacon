@@ -1,4 +1,4 @@
-package com.smartcl.androidwearsmartbeacon;
+package com.smartcl.communicationlibrary;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;

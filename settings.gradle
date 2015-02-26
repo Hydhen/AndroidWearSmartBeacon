@@ -1,1 +1,1 @@
-include ':plv_alert_mobile', ':plv_alert_wear', ':communicationlibrary', ':volley'
+include ':plv_alert_mobile', ':plv_alert_wear', ':communicationlibrary', ':volley', ':account_alert_wear', ':account_alert_mobile'

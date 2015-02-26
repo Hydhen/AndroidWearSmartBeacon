@@ -9,6 +9,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/account_alert_mobile" />
+            <option value="$PROJECT_DIR$/account_alert_wear" />
             <option value="$PROJECT_DIR$/communicationlibrary" />
             <option value="$PROJECT_DIR$/plv_alert_mobile" />
             <option value="$PROJECT_DIR$/plv_alert_wear" />

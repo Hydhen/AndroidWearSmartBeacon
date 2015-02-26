@@ -1,10 +1,9 @@
-package com.smartcl.androidwearsmartbeacon;
+package com.smartcl.communicationlibrary;
 
 import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -19,7 +18,7 @@ public class NetworkOperation {
         _queue = Volley.newRequestQueue(context);
     }
 
-    static protected String getApiUrl() {
+    public String getApiUrl() {
         return "http://ec2-54-93-111-136.eu-central-1.compute.amazonaws.com:21996/";
     }
 
