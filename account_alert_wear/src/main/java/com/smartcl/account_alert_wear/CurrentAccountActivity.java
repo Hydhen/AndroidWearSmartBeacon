@@ -38,17 +38,7 @@ public class CurrentAccountActivity extends Activity {
         TextView dateLabel = (TextView) stub.findViewById(R.id.date);
         dateLabel.setText(currentAccount.getDate());
         ImageView img = (ImageView) stub.findViewById(R.id.img);
-        switch (currentAccount.getState()) {
-            case RED:
-                img.setImageResource(R.drawable.red);
-                break;
-            case YELLOW:
-                img.setImageResource(R.drawable.yellow);
-                break;
-            case GREEN:
-                img.setImageResource(R.drawable.green);
-                break;
-        }
+        img.setImageResource(currentAccount.getStateImageResource());
     }
 
     private Account createAccountFromJson(JSONObject accountData) {

@@ -23,15 +23,35 @@ public class Account implements Serializable {
             case "green":
                 _state = eState.GREEN;
                 break;
-            default: // TODO: to change
+            default:
                 _state = eState.RED;
                 break;
         }
     }
 
-    public Long getMoney() { return _money; }
-    public eState getState() { return _state; }
-    public String getDate() { return _date; }
+    public Long getMoney() {
+        return _money;
+    }
+
+    public eState getState() {
+        return _state;
+    }
+
+    public String getDate() {
+        return _date;
+    }
+
+    public int getStateImageResource() {
+        switch (getState()) {
+            case RED:
+                return R.drawable.red;
+            case YELLOW:
+                return R.drawable.yellow;
+            case GREEN:
+                return R.drawable.green;
+        }
+        return 0;
+    }
 
     enum eState {
         RED,

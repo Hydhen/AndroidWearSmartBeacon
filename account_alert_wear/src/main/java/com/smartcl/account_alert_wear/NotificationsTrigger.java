@@ -55,7 +55,7 @@ public class NotificationsTrigger {
                         .extend(new NotificationCompat.WearableExtender()
                                         .setDisplayIntent(accountPendingIntent)
                                         .setCustomSizePreset(
-                                                NotificationCompat.WearableExtender.SIZE_LARGE))
+                                                NotificationCompat.WearableExtender.SIZE_FULL_SCREEN))
                         .build();
         return notificationAccounts;
     }
