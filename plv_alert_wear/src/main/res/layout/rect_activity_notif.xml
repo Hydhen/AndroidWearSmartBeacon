@@ -18,6 +18,15 @@
         android:textStyle="bold"
         />
 
+    <TextView
+        android:id="@+id/merci"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Merci de votre participation"
+        style="center"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -30,6 +39,7 @@
         <ImageButton
             android:id="@+id/button_yes"
             style="?android:attr/buttonStyleSmall"
+            android:paddingRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -39,6 +49,7 @@
         <ImageButton
             android:id="@+id/button_no"
             style="?android:attr/buttonStyleSmall"
+            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"

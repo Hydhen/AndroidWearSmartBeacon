@@ -33,31 +33,50 @@ public class NotificationActivity extends Activity {
         });
     }
 
-    private void setupWidgets(WatchViewStub stub) {
+    private void disableWidgets(final WatchViewStub stub) {
+      //  final Bundle bundle = getIntent().getExtras();
+      //  final String thanks = bundle.getString("Merci de votre participation");
+        ImageButton btYes = (ImageButton) stub.findViewById(R.id.button_yes);
+        ImageButton btNo = (ImageButton) stub.findViewById(R.id.button_no);
+        TextView setText = (TextView) stub.findViewById(R.id.merci);
+
+        btYes.setEnabled(false);
+        btNo.setEnabled(false);
+
+        btNo.setVisibility(View.INVISIBLE);
+        btYes.setVisibility(View.INVISIBLE);
+
+        setText.setVisibility(View.VISIBLE);
+        //setText.setText(thanks);
+    }
+
+    private void setupWidgets(final WatchViewStub stub) {
         final Bundle bundle = getIntent().getExtras();
         final String question = bundle.getString("question");
-        TextView textView = (TextView) stub.findViewById(R.id.question);
-        textView.setText(question);
+        TextView questiontext = (TextView) stub.findViewById(R.id.question);
 
+        questiontext.setText(question);
         _messageSender = new MessageSender(NotificationActivity.this);
 
-        ImageButton btYes = (ImageButton) stub.findViewById(R.id.button_yes);
+        final ImageButton btYes = (ImageButton) stub.findViewById(R.id.button_yes);
+        final ImageButton btNo = (ImageButton) stub.findViewById(R.id.button_no);
         btYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendAnswer("Yes");
+                sendAnswer("Yes", stub);
+                disableWidgets(stub);
             }
         });
-        ImageButton btNo = (ImageButton) stub.findViewById(R.id.button_no);
         btNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendAnswer("No");
+                sendAnswer("No", stub);
+                disableWidgets(stub);
             }
         });
     }
 
-    private void sendAnswer(String answer) {
+    private void sendAnswer(String answer, WatchViewStub stub) {
         final Bundle bundle = getIntent().getExtras();
         final String question = bundle.getString("question");
 
@@ -68,6 +87,8 @@ public class NotificationActivity extends Activity {
         //TODO: get name
         json.put("name", "Olivier");
         _messageSender.sendMessage(QUESTION_ANSWER_PATH, json);
+
+
     }
 
 }
