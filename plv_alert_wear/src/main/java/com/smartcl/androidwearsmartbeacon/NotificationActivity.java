@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.smartcl.communicationlibrary.LCLPreferences;
 import com.smartcl.communicationlibrary.MessageSender;
 
 import org.json.simple.JSONObject;
@@ -83,9 +84,7 @@ public class NotificationActivity extends Activity {
         JSONObject json = new JSONObject();
         json.put("answer", answer);
         json.put("question", question);
-
-        //TODO: get name
-        json.put("name", "Olivier");
+        json.put("name", LCLPreferences.GetNameUser(this));
         _messageSender.sendMessage(QUESTION_ANSWER_PATH, json);
 
 

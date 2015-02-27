@@ -50,7 +50,6 @@ public class AccountPagerAdapter extends FragmentGridPagerAdapter {
         return new ColorDrawable();
     }
 
-
     @Override
     public int getRowCount() {
         return _pages.size();

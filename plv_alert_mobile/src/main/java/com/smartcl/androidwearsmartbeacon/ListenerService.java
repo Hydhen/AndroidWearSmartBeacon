@@ -101,7 +101,7 @@ public class ListenerService extends BaseListenerService {
 
         @Override
         public void onResponse(Object response) {
-            showToast("It works: get status");
+            //showToast("It works: get status");
             super.onResponse(response);
         }
 
@@ -135,7 +135,7 @@ public class ListenerService extends BaseListenerService {
 
         @Override
         public void onResponse(Object response) {
-            showToast("It works: get question " + response);
+            //showToast("It works: get question " + response);
 
             JSONObject json = new JSONObject();
             json.put("question", response);
@@ -156,12 +156,12 @@ public class ListenerService extends BaseListenerService {
 
         @Override
         public void onErrorResponse(VolleyError error) {
-            showToast("FAIL question answer");
+            //showToast("FAIL question answer");
         }
 
         @Override
         public void onResponse(Object response) {
-            showToast("It works: answer");
+            //showToast("It works: answer");
         }
     }
 
