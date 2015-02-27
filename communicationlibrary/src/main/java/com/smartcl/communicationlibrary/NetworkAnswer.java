@@ -1,5 +1,7 @@
 package com.smartcl.communicationlibrary;
 
+import android.widget.Toast;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
@@ -16,7 +18,6 @@ public class NetworkAnswer implements Response.Listener, Response.ErrorListener 
 
     @Override
     public void onErrorResponse(VolleyError error) {
-
     }
 
     @Override

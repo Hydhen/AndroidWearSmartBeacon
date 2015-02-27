@@ -39,7 +39,7 @@ public class NotificationActivity extends Activity {
       //  final String thanks = bundle.getString("Merci de votre participation");
         ImageButton btYes = (ImageButton) stub.findViewById(R.id.button_yes);
         ImageButton btNo = (ImageButton) stub.findViewById(R.id.button_no);
-        TextView setText = (TextView) stub.findViewById(R.id.merci);
+        TextView setText = (TextView) stub.findViewById(R.id.thanks);
 
         btYes.setEnabled(false);
         btNo.setEnabled(false);

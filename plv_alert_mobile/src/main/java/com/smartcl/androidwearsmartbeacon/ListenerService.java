@@ -70,9 +70,11 @@ public class ListenerService extends BaseListenerService {
         showToast(message);
 
         NetworkOperation network = new NetworkOperation(this);
-        NetworkAnswerStudentInfo networkAnswerStudentInfo = new NetworkAnswerStudentInfo(network);
-        network.operationGet(networkAnswerStudentInfo.getSignInUrl(username),
-                             networkAnswerStudentInfo);
+        NetworkAnswerBeaconInfo networkAnswerBeaconInfo = new NetworkAnswerBeaconInfo(network,
+                                                                                      username);
+        network.operationGet(networkAnswerBeaconInfo.getBeaconProfileUrl(String.valueOf(major),
+                                                                         String.valueOf(minor)),
+                             networkAnswerBeaconInfo);
     }
 
     private void openWebsite(MessageEvent messageEvent) {
@@ -84,10 +86,54 @@ public class ListenerService extends BaseListenerService {
         startActivity(browserIntent);
     }
 
+    //////////////////////////////////////////////////////////////////////////////////
+    ////// Network Operations
+    //////////////////////////////////////////////////////////////////////////////////
+    class NetworkAnswerBeaconInfo extends NetworkAnswer {
+
+        private String _username;
+
+        public NetworkAnswerBeaconInfo(NetworkOperation network, String username) {
+            super(network);
+            _username = username;
+        }
+
+        public String getBeaconProfileUrl(String major, String minor) {
+            return _network.getApiUrl() + "beacon/get?major=" + major + "&minor=" + minor;
+        }
+
+        @Override
+        public void run(Object response) {
+            JSONObject jsonResponse = (JSONObject) JSONValue.parse((String) response);
+            final String profile = (String) jsonResponse.get("profile");
+            final String usecase = (String) jsonResponse.get("usecase");
+
+            // If not for this use case.
+            if ("PLV_Alert".toLowerCase().compareTo(usecase.toLowerCase()) != 0) {
+                showToast("not a plv alert:" + usecase);
+                return;
+            }
+
+            NetworkAnswerStudentInfo networkAnswerStudentInfo = new NetworkAnswerStudentInfo(
+                    _network, profile);
+            _network.operationGet(networkAnswerStudentInfo.getSignInUrl(_username),
+                                  networkAnswerStudentInfo);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            showToast("Error beacon info");
+        }
+
+    }
+
     class NetworkAnswerStudentInfo extends NetworkAnswer {
 
-        public NetworkAnswerStudentInfo(NetworkOperation network) {
+        private final String _profileExpected;
+
+        public NetworkAnswerStudentInfo(NetworkOperation network, String profileExpected) {
             super(network);
+            _profileExpected = profileExpected;
         }
 
         public String getSignInUrl(String name) {
@@ -95,26 +141,25 @@ public class ListenerService extends BaseListenerService {
         }
 
         @Override
-        public void onErrorResponse(VolleyError error) {
-            showToast("FAIL");
-        }
-
-        @Override
-        public void onResponse(Object response) {
-            //showToast("It works: get status");
-            super.onResponse(response);
-        }
-
-        @Override
         public void run(Object response) {
             JSONObject jsonResponse = (JSONObject) JSONValue.parse((String) response);
             final String status = (String) jsonResponse.get("status");
-            showToast("Status=" + status);
+
+            // If not the correct profile.
+            if (status.compareTo(_profileExpected) != 0) {
+                showToast("not a " + _profileExpected);
+                return;
+            }
 
             NetworkAnswerGetQuestion networkAnswerGetQuestion = new NetworkAnswerGetQuestion(
                     _network);
             _network.operationGet(networkAnswerGetQuestion.getQuestionUrl(status),
                                   networkAnswerGetQuestion);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            showToast("Error student info");
         }
     }
 
@@ -129,17 +174,15 @@ public class ListenerService extends BaseListenerService {
         }
 
         @Override
-        public void onErrorResponse(VolleyError error) {
-            showToast("FAIL question");
-        }
-
-        @Override
         public void onResponse(Object response) {
-            //showToast("It works: get question " + response);
-
             JSONObject json = new JSONObject();
             json.put("question", response);
             _messageSender.sendMessage(QUESTION_QUESTION_PATH, json);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            showToast("Error answer get question");
         }
     }
 
@@ -152,16 +195,6 @@ public class ListenerService extends BaseListenerService {
         public String getAnswerUrl(String title, String name, String answer) {
             return _network.getApiUrl() + "question/answer?title=" + title + "&name=" + name +
                     "&answer=" + answer;
-        }
-
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            //showToast("FAIL question answer");
-        }
-
-        @Override
-        public void onResponse(Object response) {
-            //showToast("It works: answer");
         }
     }
 

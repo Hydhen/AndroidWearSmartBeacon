@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
+import com.smartcl.communicationlibrary.LCLPreferences;
+
 /**
  * Trigger a notification on the wearable device.
  * This class displays the notification as well as different pages (questions)
@@ -27,7 +29,8 @@ public class NotificationsTrigger {
                 new NotificationCompat.Builder(packageContext)
                         .setSmallIcon(R.drawable.icon_ad)
                         .setContentTitle(packageContext.getString(R.string.title_activity_notif))
-                        .setContentText(packageContext.getString(R.string.content_activity_notif))
+                        .setContentText(String.format(packageContext.getString(R.string.content_activity_notif),
+                                        LCLPreferences.GetNameUser(packageContext)))
                         .addAction(R.drawable.icon_ad,
                                    packageContext.getString(R.string.open_lcl_website_title),
                                    websitePendingIntent)
