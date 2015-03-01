@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#333"
+    tools:context="eu.epitech.hub.lcl.beaconsetter.ChangeAPIUrlActivity">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="#fff"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/CAPTION_TEXTVIEW"
+        android:text="@string/ChangeApiURLCaptionText" />
+
+    <TextView
+        android:textSize="20sp"
+        android:layout_below="@+id/CAPTION_TEXTVIEW"
+        android:id="@+id/CURRENT_URL_TEXT"
+        android:textColor="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:layout_marginTop="50dp"
+        android:id="@+id/NEW_URL_TEXTVIEW"
+        android:layout_marginBottom="50dp"
+        android:layout_below="@+id/CURRENT_URL_TEXT"
+        android:text="New URL"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/CURRENT_URL_TEXT"
+        android:layout_toEndOf="@+id/NEW_URL_TEXTVIEW"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#eee"
+        android:id="@+id/URL_TEXTFIELD"
+        tools:ignore="RtlCompat,RtlHardcoded,TextFields" />
+
+    <Button
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:onClick="setUrl"
+        android:id="@+id/GET_BUTTON"
+        android:clickable="true"
+        android:text="@string/SetApiURLButtonText"
+        android:textColor="#fff"
+        android:background="#666"
+        android:width="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

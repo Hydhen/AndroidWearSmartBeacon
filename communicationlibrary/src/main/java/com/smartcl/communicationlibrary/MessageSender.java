@@ -71,7 +71,7 @@ public class MessageSender {
     /**
      * Send a message to the connected handheld device.
      */
-    public void sendMessage(final String message, final JSONObject json) {
+    public void sendMessage(final String message, final byte[] bytes) {
         // Ensure we finished to try to get the nodeID first.
         if (_retrieveDeviceNodeThread != null) {
             try {
@@ -86,10 +86,10 @@ public class MessageSender {
                 @Override
                 public void run() {
                     _client.blockingConnect(CONNECTION_TIME_OUT, TimeUnit.SECONDS);
-                    if (json != null) {
-                        Wearable.MessageApi.sendMessage(_client, _nodeId, message, json.toString()
-                                .getBytes(Charset.forName("UTF-8")));
-                    } else {
+                    if (bytes != null) {
+                        Wearable.MessageApi.sendMessage(_client, _nodeId, message, bytes);
+                    }
+                    else {
                         Wearable.MessageApi.sendMessage(_client, _nodeId, message, null);
                     }
                     _client.disconnect();
@@ -99,8 +99,12 @@ public class MessageSender {
         }
     }
 
+    public void sendMessage(final String message, final JSONObject json) {
+        sendMessage(message, json.toString().getBytes(Charset.forName("UTF-8")));
+    }
+
     public void sendMessage(final String message) {
-        sendMessage(message, null);
+        sendMessage(message, (byte[]) null);
     }
 
     public void waitForAllThreadsToFinish() {

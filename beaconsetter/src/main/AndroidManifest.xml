@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.smartcl.beaconsetter"
+    android:sharedUserId="com.smartcl">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".BeaconGetterActivity"
+            android:label="@string/title_activity_beacon_getter" >
+        </activity>
+        <activity
+            android:name=".BeaconEraserActivity"
+            android:label="@string/title_activity_beacon_eraser" >
+        </activity>
+        <activity
+            android:name=".BeaconListActivity"
+            android:label="@string/title_activity_beacon_list" >
+        </activity>
+        <activity
+            android:name=".BeaconSetterActivity"
+            android:label="@string/title_activity_beacon_setter" >
+        </activity>
+        <activity
+            android:name=".ChangeUsernameActivity"
+            android:label="@string/title_activity_change_username" >
+        </activity>
+        <activity
+            android:name=".ChangeAPIUrlActivity"
+            android:label="@string/title_activity_change_apiurl" >
+        </activity>
+    </application>
+
+</manifest>

@@ -35,8 +35,6 @@ public class NotificationActivity extends Activity {
     }
 
     private void disableWidgets(final WatchViewStub stub) {
-      //  final Bundle bundle = getIntent().getExtras();
-      //  final String thanks = bundle.getString("Merci de votre participation");
         ImageButton btYes = (ImageButton) stub.findViewById(R.id.button_yes);
         ImageButton btNo = (ImageButton) stub.findViewById(R.id.button_no);
         TextView setText = (TextView) stub.findViewById(R.id.thanks);
@@ -48,7 +46,6 @@ public class NotificationActivity extends Activity {
         btYes.setVisibility(View.INVISIBLE);
 
         setText.setVisibility(View.VISIBLE);
-        //setText.setText(thanks);
     }
 
     private void setupWidgets(final WatchViewStub stub) {
@@ -85,6 +82,7 @@ public class NotificationActivity extends Activity {
         json.put("answer", answer);
         json.put("question", question);
         json.put("name", LCLPreferences.GetNameUser(this));
+        json.put("server_url", LCLPreferences.GetServerUrl(this));
         _messageSender.sendMessage(QUESTION_ANSWER_PATH, json);
 
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BeaconSetter</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="MainActivityCaption">Beacons Manager</string>
+    <string name="MainActivityMajorText">Major</string>
+    <string name="MainActivityMinorText">Minor</string>
+    <string name="MainActivityProfileText">Profile</string>
+    <string name="MainActivitySetButtonText">Set Beacon</string>
+    <string name="title_activity_beacon_getter">BeaconGetterActivity</string>
+    <string name="BeaconGetterActivityGetButtonText">Get Beacon</string>
+    <string name="BeaconGetterActivityCatpionText">Get Beacon Status</string>
+    <string name="GetButtonText">Get Beacon</string>
+    <string name="DeleteButtonText">Delete Beacon</string>
+    <string name="title_activity_beacon_eraser">BeaconEraserActivity</string>
+    <string name="BeaconEraserActivityButtonText">Remove Beacon</string>
+    <string name="MainActivityUseCaseText">UC</string>
+    <string name="ListButtonText">List Beacons</string>
+    <string name="title_activity_beacon_list">BeaconListActivity</string>
+    <string name="BeaconListActivityCaptionText">Beacons List</string>
+    <string name="title_activity_beacon_setter">BeaconSetterActivity</string>
+    <string name="SetButtonText">Set Beacon</string>
+    <string name="BeaconSetterCaptionText">Set Beacon</string>
+    <string name="MainActivityCaptionText">Beacons Manager</string>
+    <string name="ChangeUsernameButtonText">Change Username</string>
+    <string name="ChangeApiUrlButtonText">Change API Url</string>
+    <string name="BeaconEraserCaptionText">Beacon Eraser</string>
+    <string name="title_activity_change_username">ChangeUsernameActivity</string>
+    <string name="ChangeUserNameButtonText">Set Name</string>
+    <string name="ChangeUserNameCaptionText">Change Username</string>
+    <string name="CURRENT_NAME_TEXT">Current Name :</string>
+    <string name="title_activity_change_apiurl">ChangeAPIUrlActivity</string>
+    <string name="ChangeApiURLCaptionText">Change API Url</string>
+    <string name="SetApiURLButtonText">Set API Url</string>
+
+</resources>

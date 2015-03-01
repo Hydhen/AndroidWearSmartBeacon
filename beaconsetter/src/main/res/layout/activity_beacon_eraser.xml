@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#333"
+    tools:context="eu.epitech.hub.lcl.beaconsetter.BeaconEraserActivity">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="#fff"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/CAPTION_TEXTVIEW"
+        android:text="@string/BeaconEraserCaptionText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:id="@+id/MAJOR_TEXTVIEW"
+        android:layout_marginBottom="50dp"
+        android:layout_below="@+id/CAPTION_TEXTVIEW"
+        android:text="@string/MainActivityMajorText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:id="@+id/NEW_NAME_TEXTVIEW"
+        android:layout_marginBottom="50dp"
+        android:layout_below="@+id/MAJOR_TEXTVIEW"
+        android:text="@string/MainActivityMinorText" />
+
+    <EditText
+        android:layout_marginLeft="20dp"
+        android:textColor="#eee"
+        android:layout_below="@+id/CAPTION_TEXTVIEW"
+        android:layout_toEndOf="@+id/MAJOR_TEXTVIEW"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/MAJOR_TEXTFIELD"
+        tools:ignore="RtlCompat,RtlHardcoded" />
+
+    <EditText
+        android:layout_marginLeft="20dp"
+        android:textColor="#eee"
+        android:layout_below="@+id/MAJOR_TEXTVIEW"
+        android:layout_toEndOf="@+id/NEW_NAME_TEXTVIEW"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/MINOR_TEXTFIELD"
+        tools:ignore="RtlCompat,RtlHardcoded" />
+
+    <Button
+        android:layout_below="@+id/NEW_NAME_TEXTVIEW"
+        android:layout_centerHorizontal="true"
+        android:onClick="removeBeacon"
+        android:id="@+id/GET_BUTTON"
+        android:textColor="#fff"
+        android:background="#666"
+        android:width="150dp"
+        android:text="@string/BeaconEraserActivityButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:id="@+id/RESULT_TEXT_VIEW"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/GET_BUTTON"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/PROGRESS_BAR"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

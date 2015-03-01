@@ -1,6 +1,9 @@
 package com.smartcl.androidwearsmartbeacon;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import com.android.volley.VolleyError;
@@ -11,6 +14,10 @@ import com.smartcl.communicationlibrary.NetworkOperation;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.Map;
 
 /**
  * Listener which reacts to the messages sent by the wearable device.
@@ -25,6 +32,8 @@ public class ListenerService extends BaseListenerService {
     public static final String QUESTION_ANSWER_PATH = "/question/answer/";
     public static final String WEBSITE_OPEN_PATH = "/website/open/lcl/";
     public static final String QUESTION_QUESTION_PATH = "/question/question";
+    public static final String GET_PREFERENCES_PATH = "/preferences/";
+    public static final String SEND_PREFERENCES_PATH = "/preferences/data/";
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
@@ -39,6 +48,9 @@ public class ListenerService extends BaseListenerService {
             case WEBSITE_OPEN_PATH:
                 openWebsite(messageEvent);
                 break;
+            case GET_PREFERENCES_PATH:
+                getPreferences(messageEvent);
+                break;
             default:
                 showToast("Unknown message:" + path);
                 break;
@@ -49,27 +61,45 @@ public class ListenerService extends BaseListenerService {
         JSONObject json = extractJsonFromMessage(messageEvent);
         final String answer = (String) json.get("answer");
         final String question = (String) json.get("question");
-        final String name = (String) json.get("name");
+        final String username = getCommonSharedPreferences().getString("name", "");
+        final String serverUrl = getCommonSharedPreferences().getString("api_url", "");
 
         final String message = messageEvent.getPath() + "Answer[" + answer + "]";
-        showToast(message);
+        showToast(message + "URL=" + serverUrl);
 
-        NetworkOperation network = new NetworkOperation(this);
+        NetworkOperation network = new NetworkOperation(this, serverUrl);
         NetworkAnswerGetAnswer networkAnswerGetAnswer = new NetworkAnswerGetAnswer(network);
-        network.operationGet(networkAnswerGetAnswer.getAnswerUrl(question, name, answer),
+        network.operationGet(networkAnswerGetAnswer.getAnswerUrl(question, username, answer),
                              networkAnswerGetAnswer);
+    }
+
+    private SharedPreferences getCommonSharedPreferences() {
+        Context context = null;
+        try {
+            context = createPackageContext("com.smartcl.beaconsetter",
+                                           Context.MODE_WORLD_WRITEABLE);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (context != null) {
+            SharedPreferences prefs = context
+                    .getSharedPreferences("LclSmartbeaconPrefs", MODE_WORLD_READABLE);
+            return prefs;
+        }
+        return null;
     }
 
     private void beaconHasEntered(MessageEvent messageEvent) {
         JSONObject json = extractJsonFromMessage(messageEvent);
         final long major = (long) json.get("major");
         final long minor = (long) json.get("minor");
-        final String username = (String) json.get("username");
+        final String username = getCommonSharedPreferences().getString("name", "");
+        final String serverUrl = getCommonSharedPreferences().getString("api_url", "");
 
         final String message = messageEvent.getPath() + "Major[" + major + "]Minor[" + minor + "]";
-        showToast(message);
+        showToast(message + " URL=" + serverUrl);
 
-        NetworkOperation network = new NetworkOperation(this);
+        NetworkOperation network = new NetworkOperation(this, serverUrl);
         NetworkAnswerBeaconInfo networkAnswerBeaconInfo = new NetworkAnswerBeaconInfo(network,
                                                                                       username);
         network.operationGet(networkAnswerBeaconInfo.getBeaconProfileUrl(String.valueOf(major),
@@ -84,6 +114,22 @@ public class ListenerService extends BaseListenerService {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(path));
         browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(browserIntent);
+    }
+
+    private void getPreferences(MessageEvent messageEvent) {
+        showToast("GET PREFERENCES");
+        SharedPreferences prefs = getCommonSharedPreferences();
+        Map<String, ?> all = prefs.getAll();
+        try {
+            ByteArrayOutputStream bo = new ByteArrayOutputStream();
+            ObjectOutputStream so = new ObjectOutputStream(bo);
+            so.writeObject(all);
+            so.flush();
+            showToast("Send preferences back");
+            _messageSender.sendMessage(SEND_PREFERENCES_PATH, bo.toByteArray());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////////
@@ -197,5 +243,4 @@ public class ListenerService extends BaseListenerService {
                     "&answer=" + answer;
         }
     }
-
 }

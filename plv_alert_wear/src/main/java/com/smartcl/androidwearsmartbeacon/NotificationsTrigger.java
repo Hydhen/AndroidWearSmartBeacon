@@ -24,7 +24,6 @@ public class NotificationsTrigger {
         PendingIntent websitePendingIntent = PendingIntent
                 .getService(packageContext, 0, websiteIntent, 0);
 
-        //TODO: put the string in string.xml file
         Notification notification =
                 new NotificationCompat.Builder(packageContext)
                         .setSmallIcon(R.drawable.icon_ad)

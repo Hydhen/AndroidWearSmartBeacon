@@ -1,6 +1,7 @@
 <manifest
     package="com.smartcl.communicationlibrary"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:sharedUserId="com.smartcl">
 
     <application
         android:allowBackup="true"

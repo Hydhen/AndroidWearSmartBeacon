@@ -13,13 +13,15 @@ import com.android.volley.toolbox.Volley;
 public class NetworkOperation {
 
     private RequestQueue _queue;
+    private String _serverUrl;
 
-    public NetworkOperation(Context context) {
+    public NetworkOperation(Context context, String serverUrl) {
+        _serverUrl = serverUrl;
         _queue = Volley.newRequestQueue(context);
     }
 
     public String getApiUrl() {
-        return "http://ec2-54-93-111-136.eu-central-1.compute.amazonaws.com:21996/";
+        return _serverUrl;
     }
 
     public void operationGet(final String url, NetworkAnswer answer) {

@@ -86,7 +86,6 @@ class TimerThreads {
         JSONObject json = new JSONObject();
         json.put("major", beacon.getMajor());
         json.put("minor", beacon.getMinor());
-        json.put("username", LCLPreferences.GetNameUser(context));
         return json;
     }
 
@@ -126,7 +125,9 @@ class TimerThreads {
 public class DiscoverBeaconsService extends Service implements SBLocationManagerListener {
 
     private final TimerThreads _timerThreads = new TimerThreads();
+    private final String GET_PREFERENCES = "/preferences/";
     private boolean _isInitialized = false;
+    private boolean _arePreferencesGotten = false;
     private MessageSender _messageSender = null;
 
     @Override
@@ -139,16 +140,8 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
         if (!_isInitialized) {
             _isInitialized = true;
 
-            final boolean isPassed = LCLPreferences.GetStatusUser(this);
-            // We send the notification only the first time we detect the beacon.
-            if (isPassed) {
-                Toast.makeText(this, "We already passed next to this PLV advertising",
-                               Toast.LENGTH_SHORT).show();
-                // TODO: uncomment this once in production
-                //return;
-            }
+            _messageSender = new MessageSender(this);
 
-            _messageSender = new MessageSender(getApplicationContext());
             // disable logging message
             SBLogger.setSilentMode(true);
 
@@ -156,8 +149,6 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
             sbManager.addEntireSBRegion();
             sbManager.addBeaconLocationListener(this);
             sbManager.startMonitoringAllBeaconRegions();
-
-            LCLPreferences.SetNameUser(this, "Olivier");
         }
     }
 
@@ -181,9 +172,13 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
 
     @Override
     public void onEnteredBeacons(List<SBBeacon> sbBeacons) {
+        if (_arePreferencesGotten == false) {
+            _arePreferencesGotten = true;
+            _messageSender.sendMessage(GET_PREFERENCES);
+        }
         for (SBBeacon beacon : sbBeacons) {
-            _timerThreads.queueBeacon(this, _messageSender, beacon);
             Toast.makeText(this, "Beacon enter", Toast.LENGTH_SHORT).show();
+            _timerThreads.queueBeacon(this, _messageSender, beacon);
         }
     }
 

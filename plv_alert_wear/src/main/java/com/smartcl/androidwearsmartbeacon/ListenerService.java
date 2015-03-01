@@ -2,8 +2,11 @@ package com.smartcl.androidwearsmartbeacon;
 
 import com.google.android.gms.wearable.MessageEvent;
 import com.smartcl.communicationlibrary.BaseListenerService;
+import com.smartcl.communicationlibrary.LCLPreferences;
 
 import org.json.simple.JSONObject;
+
+import java.util.Map;
 
 
 /**
@@ -12,6 +15,7 @@ import org.json.simple.JSONObject;
 public class ListenerService extends BaseListenerService {
 
     public static final String QUESTION_QUESTION_PATH = "/question/question";
+    public static final String SEND_PREFERENCES_PATH = "/preferences/data/";
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
@@ -20,20 +24,25 @@ public class ListenerService extends BaseListenerService {
             case QUESTION_QUESTION_PATH:
                 questionGotten(messageEvent);
                 break;
+            case SEND_PREFERENCES_PATH:
+                showToast("SEND PREF BACK");
+                preferencesGotten(messageEvent);
+                break;
             default:
                 showToast("Unknown message:" + path);
                 break;
         }
     }
 
+    private void preferencesGotten(MessageEvent messageEvent) {
+        byte[] data = messageEvent.getData();
+        Map<String, ?> map = LCLPreferences.GetDeserialized(data);
+        LCLPreferences.WritePreferences(this, map);
+    }
+
     private void questionGotten(MessageEvent messageEvent) {
         JSONObject json = extractJsonFromMessage(messageEvent);
         final String question = (String) json.get("question");
-
-        // TODO: check format
-        showToast(messageEvent.getPath());
-
-        //TODO: if question, send if as parameter to the trigger notification (reuqire refactoring).
         NotificationsTrigger.TriggerNotification(this, question);
     }
 
