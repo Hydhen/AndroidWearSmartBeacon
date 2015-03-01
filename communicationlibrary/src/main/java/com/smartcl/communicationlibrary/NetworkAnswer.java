@@ -1,7 +1,5 @@
 package com.smartcl.communicationlibrary;
 
-import android.widget.Toast;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 

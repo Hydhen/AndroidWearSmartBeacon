@@ -230,9 +230,20 @@ public class ListenerService extends BaseListenerService {
         }
 
         public String getAnswerUrl(String title, String name, String answer) {
-            final String url = _network.getApiUrl() + "question/answer?title=" + title + "&name=" + name +
+            final String url = _network.getApiUrl() + "question/answer?title=useless" +
+                    "&name=" + name +
                     "&answer=" + answer;
             return url;
+        }
+
+        @Override
+        public void onResponse(Object response) {
+            showToast("A mail has been sent");
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            showToast("Error mail to send");
         }
     }
 }
