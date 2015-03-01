@@ -64,9 +64,6 @@ public class ListenerService extends BaseListenerService {
         final String username = getCommonSharedPreferences().getString("name", "");
         final String serverUrl = getCommonSharedPreferences().getString("api_url", "");
 
-        final String message = messageEvent.getPath() + "Answer[" + answer + "]";
-        showToast(message + "URL=" + serverUrl);
-
         NetworkOperation network = new NetworkOperation(this, serverUrl);
         NetworkAnswerGetAnswer networkAnswerGetAnswer = new NetworkAnswerGetAnswer(network);
         network.operationGet(networkAnswerGetAnswer.getAnswerUrl(question, username, answer),
@@ -96,9 +93,6 @@ public class ListenerService extends BaseListenerService {
         final String username = getCommonSharedPreferences().getString("name", "");
         final String serverUrl = getCommonSharedPreferences().getString("api_url", "");
 
-        final String message = messageEvent.getPath() + "Major[" + major + "]Minor[" + minor + "]";
-        showToast(message + " URL=" + serverUrl);
-
         NetworkOperation network = new NetworkOperation(this, serverUrl);
         NetworkAnswerBeaconInfo networkAnswerBeaconInfo = new NetworkAnswerBeaconInfo(network,
                                                                                       username);
@@ -117,7 +111,6 @@ public class ListenerService extends BaseListenerService {
     }
 
     private void getPreferences(MessageEvent messageEvent) {
-        showToast("GET PREFERENCES");
         SharedPreferences prefs = getCommonSharedPreferences();
         Map<String, ?> all = prefs.getAll();
         try {
@@ -125,7 +118,6 @@ public class ListenerService extends BaseListenerService {
             ObjectOutputStream so = new ObjectOutputStream(bo);
             so.writeObject(all);
             so.flush();
-            showToast("Send preferences back");
             _messageSender.sendMessage(SEND_PREFERENCES_PATH, bo.toByteArray());
         } catch (Exception e) {
             e.printStackTrace();
@@ -170,7 +162,6 @@ public class ListenerService extends BaseListenerService {
         public void onErrorResponse(VolleyError error) {
             showToast("Error beacon info");
         }
-
     }
 
     class NetworkAnswerStudentInfo extends NetworkAnswer {
@@ -239,8 +230,9 @@ public class ListenerService extends BaseListenerService {
         }
 
         public String getAnswerUrl(String title, String name, String answer) {
-            return _network.getApiUrl() + "question/answer?title=" + title + "&name=" + name +
+            final String url = _network.getApiUrl() + "question/answer?title=" + title + "&name=" + name +
                     "&answer=" + answer;
+            return url;
         }
     }
 }

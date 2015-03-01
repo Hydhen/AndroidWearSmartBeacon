@@ -25,7 +25,6 @@ public class ListenerService extends BaseListenerService {
                 questionGotten(messageEvent);
                 break;
             case SEND_PREFERENCES_PATH:
-                showToast("SEND PREF BACK");
                 preferencesGotten(messageEvent);
                 break;
             default:
