@@ -1,9 +1,6 @@
 package com.smartcl.androidwearsmartbeacon;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import com.android.volley.VolleyError;
@@ -14,10 +11,6 @@ import com.smartcl.communicationlibrary.NetworkOperation;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
-import java.util.Map;
 
 /**
  * Listener which reacts to the messages sent by the wearable device.
@@ -70,22 +63,6 @@ public class ListenerService extends BaseListenerService {
                              networkAnswerGetAnswer);
     }
 
-    private SharedPreferences getCommonSharedPreferences() {
-        Context context = null;
-        try {
-            context = createPackageContext("com.smartcl.beaconsetter",
-                                           Context.MODE_WORLD_WRITEABLE);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (context != null) {
-            SharedPreferences prefs = context
-                    .getSharedPreferences("LclSmartbeaconPrefs", MODE_WORLD_READABLE);
-            return prefs;
-        }
-        return null;
-    }
-
     private void beaconHasEntered(MessageEvent messageEvent) {
         JSONObject json = extractJsonFromMessage(messageEvent);
         final long major = (long) json.get("major");
@@ -111,16 +88,9 @@ public class ListenerService extends BaseListenerService {
     }
 
     private void getPreferences(MessageEvent messageEvent) {
-        SharedPreferences prefs = getCommonSharedPreferences();
-        Map<String, ?> all = prefs.getAll();
-        try {
-            ByteArrayOutputStream bo = new ByteArrayOutputStream();
-            ObjectOutputStream so = new ObjectOutputStream(bo);
-            so.writeObject(all);
-            so.flush();
-            _messageSender.sendMessage(SEND_PREFERENCES_PATH, bo.toByteArray());
-        } catch (Exception e) {
-            e.printStackTrace();
+        byte[] preferencesSerialized = getPreferencesSerialized(messageEvent);
+        if (preferencesSerialized != null) {
+            _messageSender.sendMessage(SEND_PREFERENCES_PATH, preferencesSerialized);
         }
     }
 

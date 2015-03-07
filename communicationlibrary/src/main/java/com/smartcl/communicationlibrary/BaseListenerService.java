@@ -1,5 +1,8 @@
 package com.smartcl.communicationlibrary;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.widget.Toast;
 
@@ -8,6 +11,10 @@ import com.google.android.gms.wearable.WearableListenerService;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.Map;
 
 /**
  * Should be implemented by listeners which exchange message with MessageSender.
@@ -43,5 +50,36 @@ public class BaseListenerService extends WearableListenerService {
 
         JSONObject json = (JSONObject) JSONValue.parse(strData);
         return json;
+    }
+
+    protected SharedPreferences getCommonSharedPreferences() {
+        Context context = null;
+        try {
+            context = createPackageContext("com.smartcl.beaconsetter",
+                                           Context.MODE_WORLD_WRITEABLE);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (context != null) {
+            SharedPreferences prefs = context
+                    .getSharedPreferences("LclSmartbeaconPrefs", MODE_WORLD_READABLE);
+            return prefs;
+        }
+        return null;
+    }
+
+    protected byte[] getPreferencesSerialized(MessageEvent messageEvent) {
+        SharedPreferences prefs = getCommonSharedPreferences();
+        Map<String, ?> all = prefs.getAll();
+        try {
+            ByteArrayOutputStream bo = new ByteArrayOutputStream();
+            ObjectOutputStream so = new ObjectOutputStream(bo);
+            so.writeObject(all);
+            so.flush();
+            return bo.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

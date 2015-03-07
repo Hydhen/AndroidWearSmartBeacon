@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
+import com.smartcl.communicationlibrary.LCLPreferences;
+
 import org.json.simple.JSONObject;
 
 /**
@@ -19,17 +21,21 @@ public class NotificationsTrigger {
 
     public static void TriggerNotification(Context packageContext, JSONObject accountsJson) {
         Notification accountNotif = buildAccountNotification(packageContext, accountsJson);
-        PendingIntent accountHistoryIntent = buildAccountHistoryIntent(packageContext, accountsJson);
+        PendingIntent accountHistoryIntent = buildAccountHistoryIntent(packageContext,
+                                                                       accountsJson);
 
-        //TODO: put the string in string.xml file
         Notification notification =
                 new NotificationCompat.Builder(packageContext)
                         .setSmallIcon(R.drawable.icon_bank)
-                        .setContentTitle("title")
-                        .setContentText("content") //TODO: set content
+                        .setContentTitle(packageContext.getString(R.string.account_notif_title))
+                        .setContentText(String.format(
+                                packageContext.getString(R.string.account_notif_content),
+                                LCLPreferences.GetNameUser(packageContext)))
                         .extend(new NotificationCompat.WearableExtender().addPage(accountNotif))
-                        .addAction(R.drawable.icon_bank, packageContext.getString(R.string.account_history), accountHistoryIntent)
-                        .setVibrate(new long[]{1000, 1000})
+                        .addAction(R.drawable.icon_bank,
+                                   packageContext.getString(R.string.account_previsions),
+                                   accountHistoryIntent)
+                        .setVibrate(new long[]{500, 500})
                         .build();
 
         NotificationManagerCompat notificationManager =
@@ -60,7 +66,8 @@ public class NotificationsTrigger {
         return notificationAccounts;
     }
 
-    private static PendingIntent buildAccountHistoryIntent(Context packageContext, JSONObject accountsJson) {
+    private static PendingIntent buildAccountHistoryIntent(Context packageContext,
+                                                           JSONObject accountsJson) {
         Intent accountIntent = new Intent(packageContext, AccountHistoryActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("account_data", accountsJson.toJSONString());

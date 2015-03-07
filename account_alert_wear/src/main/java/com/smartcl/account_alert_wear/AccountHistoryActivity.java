@@ -44,7 +44,7 @@ public class AccountHistoryActivity extends Activity {
         Account currentAccount = createAccountFromJson(currentAccountJson);
         accounts.add(currentAccount);
 
-        JSONArray historyJsonArray = (JSONArray) accountInformation.get("history");
+        JSONArray historyJsonArray = (JSONArray) accountInformation.get("previsions");
         for (Object accountHistory : historyJsonArray) {
             Account account = createAccountFromJson((JSONObject) accountHistory);
             accounts.add(account);

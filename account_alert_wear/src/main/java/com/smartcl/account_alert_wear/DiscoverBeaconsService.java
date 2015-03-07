@@ -26,6 +26,8 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
     public static final String BEACON_ENTERED_PATH = "/beacon/entered/";
     private boolean _isInitialized = false;
     private MessageSender _messageSender = null;
+    private boolean _arePreferencesGotten = false;
+    private final String GET_PREFERENCES = "/preferences/";
 
     @Override
     public void onCreate() {
@@ -37,7 +39,7 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
         if (!_isInitialized) {
             _isInitialized = true;
 
-            _messageSender = new MessageSender(getApplicationContext());
+            _messageSender = new MessageSender(this);
             // disable logging message
             SBLogger.setSilentMode(true);
 
@@ -68,6 +70,10 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
 
     @Override
     public void onEnteredBeacons(List<SBBeacon> sbBeacons) {
+        if (_arePreferencesGotten == false) {
+            _arePreferencesGotten = true;
+            _messageSender.sendMessage(GET_PREFERENCES);
+        }
         for (SBBeacon beacon : sbBeacons) {
             JSONObject json = buildJsonObjectFromBeacon(beacon);
             _messageSender.sendMessage(BEACON_ENTERED_PATH, json);

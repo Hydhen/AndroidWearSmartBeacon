@@ -165,8 +165,14 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
 
     @Override
     public void onDestroy() {
-        SBLocationManager.getInstance(this)
-                .stopMonitoringAllBeaconRegions();
+        try {
+            SBLocationManager sbManager = SBLocationManager.getInstance(this);
+            if (sbManager != null) {
+                sbManager.stopMonitoringAllBeaconRegions();
+            }
+        } catch (Exception e) {
+
+        }
         super.onDestroy();
     }
 

@@ -11,6 +11,6 @@
     <string name="content_activity_notif">Bonjour %s, </string>
     <string name="thanks_question">Merci de votre participation.</string>
 
-    <string name="open_lcl_website_title">Ouvrir le site LCL</string>
+    <string name="open_lcl_website_title">Accéder au site LCL</string>
 
 </resources>

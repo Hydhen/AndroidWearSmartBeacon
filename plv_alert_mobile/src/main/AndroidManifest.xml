@@ -2,7 +2,7 @@
 <manifest
     package="com.smartcl.androidwearsmartbeacon"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:sharedUserId="com.smartcl">>
+    android:sharedUserId="com.smartcl">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

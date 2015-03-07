@@ -16,6 +16,8 @@ public class ListenerService extends BaseListenerService {
 
     public static final String BEACON_ENTERED_PATH = "/beacon/entered/";
     public static final String ACCOUNTS_PATH = "/accounts/";
+    public static final String GET_PREFERENCES_PATH = "/preferences/";
+    public static final String SEND_PREFERENCES_PATH = "/preferences/data/";
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
@@ -24,6 +26,9 @@ public class ListenerService extends BaseListenerService {
         switch (path) {
             case BEACON_ENTERED_PATH:
                 beaconHasEntered(messageEvent);
+                break;
+            case GET_PREFERENCES_PATH:
+                getPreferences(messageEvent);
                 break;
             default:
                 showToast("Unknown message:" + path);
@@ -43,6 +48,14 @@ public class ListenerService extends BaseListenerService {
         //TODO: send message
         jsonToSend.put("accounts", "A");
         _messageSender.sendMessage(ACCOUNTS_PATH, jsonToSend);
+    }
+
+    private void getPreferences(MessageEvent messageEvent) {
+        showToast("Get preferences");
+        byte[] preferencesSerialized = getPreferencesSerialized(messageEvent);
+        if (preferencesSerialized != null) {
+            _messageSender.sendMessage(SEND_PREFERENCES_PATH, preferencesSerialized);
+        }
     }
 
 }

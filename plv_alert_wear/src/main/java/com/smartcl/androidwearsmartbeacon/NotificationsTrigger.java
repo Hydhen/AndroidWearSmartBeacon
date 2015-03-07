@@ -28,13 +28,14 @@ public class NotificationsTrigger {
                 new NotificationCompat.Builder(packageContext)
                         .setSmallIcon(R.drawable.icon_ad)
                         .setContentTitle(packageContext.getString(R.string.title_activity_notif))
-                        .setContentText(String.format(packageContext.getString(R.string.content_activity_notif),
-                                        LCLPreferences.GetNameUser(packageContext)))
+                        .setContentText(String.format(
+                                packageContext.getString(R.string.content_activity_notif),
+                                LCLPreferences.GetNameUser(packageContext)))
                         .addAction(R.drawable.icon_ad,
                                    packageContext.getString(R.string.open_lcl_website_title),
                                    websitePendingIntent)
                         .extend(new NotificationCompat.WearableExtender().addPage(questionNotif))
-                        .setVibrate(new long[]{1000, 1000})
+                        .setVibrate(new long[]{500, 500})
                         .build();
 
 

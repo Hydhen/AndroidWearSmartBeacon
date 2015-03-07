@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">Account_alert_wear</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="hello_round">Hello Round World!</string>
-    <string name="hello_square">Hello Square World!</string>
     <string name="title_activity_notification">NotificationActivity</string>
     <string name="title_activity_current_account">CurrentAccountActivity</string>
 
-    <string name="account_history">Historique</string>
+    <string name="welcome">Bienvenue dans l\'application LCL.</string>
+    <string name="text_info">Lors de votre passage devant une agence LCL vous recevez une notification avec le solde de votre compte courant.</string>
+    <string name="stop_service">Arrêter le suivi</string>
+
+    <string name="account_previsions">Prévisions</string>
+    <string name="account_notif_title">Title</string>
+    <string name="account_notif_content">Bonjour %s</string>
+
 </resources>
