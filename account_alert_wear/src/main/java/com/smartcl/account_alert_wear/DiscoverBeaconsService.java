@@ -24,10 +24,10 @@ import eu.smartbeacon.sdk.utils.SBLogger;
 public class DiscoverBeaconsService extends Service implements SBLocationManagerListener {
 
     public static final String BEACON_ENTERED_PATH = "/beacon/entered/";
+    private final String GET_PREFERENCES = "/preferences/";
     private boolean _isInitialized = false;
     private MessageSender _messageSender = null;
     private boolean _arePreferencesGotten = false;
-    private final String GET_PREFERENCES = "/preferences/";
 
     @Override
     public void onCreate() {

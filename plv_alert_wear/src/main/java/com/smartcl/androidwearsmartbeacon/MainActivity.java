@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.smartcl.communicationlibrary.MessageSender;
-
 
 /**
  * Main activity of the wearable application.

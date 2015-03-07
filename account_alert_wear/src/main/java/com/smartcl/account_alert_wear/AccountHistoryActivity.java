@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.wearable.view.GridViewPager;
 import android.support.wearable.view.WatchViewStub;
 
-import com.smartcl.communicationlibrary.MessageSender;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -52,7 +50,8 @@ public class AccountHistoryActivity extends Activity {
 
         final GridViewPager pager = (GridViewPager) stub.findViewById(R.id.pager);
         pager.setAdapter(
-                new AccountPagerAdapter(AccountHistoryActivity.this, getFragmentManager(), accounts));
+                new AccountPagerAdapter(AccountHistoryActivity.this, getFragmentManager(),
+                                        accounts));
     }
 
     private Account createAccountFromJson(JSONObject accountData) {

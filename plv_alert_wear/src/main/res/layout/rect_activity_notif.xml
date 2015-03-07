@@ -20,13 +20,13 @@
 
     <TextView
         android:id="@+id/thanks"
+        style="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/thanks_question"
-        style="center"
-        android:visibility="gone"
-        android:textColor="#FF0000FF"/>
+        android:textColor="#FF0000FF"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -40,20 +40,20 @@
         <ImageButton
             android:id="@+id/button_yes"
             style="?android:attr/buttonStyleSmall"
-            android:paddingRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:background="@null"
+            android:paddingRight="10dp"
             android:src="@drawable/yes"/>
 
         <ImageButton
             android:id="@+id/button_no"
             style="?android:attr/buttonStyleSmall"
-            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:paddingLeft="10dp"
             android:src="@drawable/no"/>
 
     </LinearLayout>

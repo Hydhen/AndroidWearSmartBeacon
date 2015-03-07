@@ -1,7 +1,6 @@
 package com.smartcl.account_alert_wear;
 
 import android.app.Activity;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.widget.ImageView;

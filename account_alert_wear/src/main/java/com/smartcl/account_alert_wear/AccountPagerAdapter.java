@@ -41,11 +41,14 @@ public class AccountPagerAdapter extends FragmentGridPagerAdapter {
         AccountPage page = _pages.get(row);
         switch (page.getAccount().getState()) {
             case RED:
-                return new GradientDrawable(GradientDrawable.Orientation.TL_BR, new int[] {0xFFFF0000, 0xFFFFFFFF});
+                return new GradientDrawable(GradientDrawable.Orientation.TL_BR,
+                                            new int[]{0xFFFF0000, 0xFFFFFFFF});
             case YELLOW:
-                return new GradientDrawable(GradientDrawable.Orientation.TL_BR, new int[] {0xFFFFFF00, 0xFFFFFFFF});
+                return new GradientDrawable(GradientDrawable.Orientation.TL_BR,
+                                            new int[]{0xFFFFFF00, 0xFFFFFFFF});
             case GREEN:
-                return new GradientDrawable(GradientDrawable.Orientation.TL_BR, new int[] {0xFF00FF00, 0xFFFFFFFF});
+                return new GradientDrawable(GradientDrawable.Orientation.TL_BR,
+                                            new int[]{0xFF00FF00, 0xFFFFFFFF});
         }
         return new ColorDrawable();
     }

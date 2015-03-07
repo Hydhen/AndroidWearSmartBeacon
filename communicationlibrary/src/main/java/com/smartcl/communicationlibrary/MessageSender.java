@@ -19,13 +19,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class MessageSender {
     private static final long CONNECTION_TIME_OUT = 2; // seconds
-
+    private final Context _context;
     private GoogleApiClient _client;
     private String _nodeId;
     private Thread _retrieveDeviceNodeThread = null;
     private Thread _messageThread = null;
-
-    private final Context _context;
 
     /**
      * Initialize the GoogleApiClient and get the Node ID of the connected device.
@@ -36,7 +34,9 @@ public class MessageSender {
         retrieveDeviceNode();
     }
 
-    public Context getContext() {return _context;}
+    public Context getContext() {
+        return _context;
+    }
 
     private GoogleApiClient getGoogleApiClient(Context context) {
         return new GoogleApiClient.Builder(context)
