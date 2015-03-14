@@ -7,8 +7,10 @@
     <string name="welcome">Bienvenue dans l\'application LCL.</string>
     <string name="text_info">Lors de votre passage devant une agence LCL vous recevez une notification avec le solde de votre compte courant.</string>
     <string name="stop_service">Arrêter le suivi</string>
+    <string name="open_app">Effectuer un virement sur l\'application LCL</string>
+    <string name="account_overview_title">Aperçu des comptes courants (J, J+5, J+10)</string>
 
-    <string name="account_previsions">Prévisions</string>
+    <string name="account_previsions">Aperçu détaillé des comptes</string>
     <string name="account_notif_title">Title</string>
     <string name="account_notif_content">Bonjour %s</string>
 

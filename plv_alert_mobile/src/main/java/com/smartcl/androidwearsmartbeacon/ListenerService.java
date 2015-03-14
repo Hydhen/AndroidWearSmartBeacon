@@ -23,7 +23,7 @@ public class ListenerService extends BaseListenerService {
 
     public static final String BEACON_ENTERED_PATH = "/beacon/entered/";
     public static final String QUESTION_ANSWER_PATH = "/question/answer/";
-    public static final String WEBSITE_OPEN_PATH = "/website/open/lcl/";
+    public static final String APP_OPEN_PATH = "/app/open/lcl/";
     public static final String QUESTION_QUESTION_PATH = "/question/question";
     public static final String GET_PREFERENCES_PATH = "/preferences/";
     public static final String SEND_PREFERENCES_PATH = "/preferences/data/";
@@ -38,8 +38,8 @@ public class ListenerService extends BaseListenerService {
             case QUESTION_ANSWER_PATH:
                 getAnswer(messageEvent);
                 break;
-            case WEBSITE_OPEN_PATH:
-                openWebsite(messageEvent);
+            case APP_OPEN_PATH:
+                openApp(messageEvent);
                 break;
             case GET_PREFERENCES_PATH:
                 getPreferences(messageEvent);
@@ -78,13 +78,21 @@ public class ListenerService extends BaseListenerService {
                              networkAnswerBeaconInfo);
     }
 
-    private void openWebsite(MessageEvent messageEvent) {
+    private void openApp(MessageEvent messageEvent) {
         JSONObject json = extractJsonFromMessage(messageEvent);
-        final String path = (String) json.get("path");
 
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(path));
-        browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(browserIntent);
+        final String appPackageName = (String) json.get("details");
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                                       Uri.parse("market://details?id=" + appPackageName));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } catch (android.content.ActivityNotFoundException anfe) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                    "https://play.google.com/store/apps/details?id=" + appPackageName));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
     }
 
     private void getPreferences(MessageEvent messageEvent) {

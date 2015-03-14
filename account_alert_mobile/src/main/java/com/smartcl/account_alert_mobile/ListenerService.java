@@ -1,5 +1,8 @@
 package com.smartcl.account_alert_mobile;
 
+import android.content.Intent;
+import android.net.Uri;
+
 import com.google.android.gms.wearable.MessageEvent;
 import com.smartcl.communicationlibrary.BaseListenerService;
 
@@ -18,6 +21,7 @@ public class ListenerService extends BaseListenerService {
     public static final String ACCOUNTS_PATH = "/accounts/";
     public static final String GET_PREFERENCES_PATH = "/preferences/";
     public static final String SEND_PREFERENCES_PATH = "/preferences/data/";
+    public static final String APP_OPEN_PATH = "/app/open/lcl/";
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
@@ -29,6 +33,9 @@ public class ListenerService extends BaseListenerService {
                 break;
             case GET_PREFERENCES_PATH:
                 getPreferences(messageEvent);
+                break;
+            case APP_OPEN_PATH:
+                openApp(messageEvent);
                 break;
             default:
                 showToast("Unknown message:" + path);
@@ -45,7 +52,7 @@ public class ListenerService extends BaseListenerService {
         showToast(message);
 
         JSONObject jsonToSend = new JSONObject();
-        //TODO: send message
+        //TODO: make network request and send data.
         jsonToSend.put("accounts", "A");
         _messageSender.sendMessage(ACCOUNTS_PATH, jsonToSend);
     }
@@ -55,6 +62,23 @@ public class ListenerService extends BaseListenerService {
         byte[] preferencesSerialized = getPreferencesSerialized(messageEvent);
         if (preferencesSerialized != null) {
             _messageSender.sendMessage(SEND_PREFERENCES_PATH, preferencesSerialized);
+        }
+    }
+
+    private void openApp(MessageEvent messageEvent) {
+        JSONObject json = extractJsonFromMessage(messageEvent);
+
+        final String appPackageName = (String) json.get("details");
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                                       Uri.parse("market://details?id=" + appPackageName));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } catch (android.content.ActivityNotFoundException anfe) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                    "https://play.google.com/store/apps/details?id=" + appPackageName));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     }
 

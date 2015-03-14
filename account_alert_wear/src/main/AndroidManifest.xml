@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.smartcl.account_alert_wear"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="com.smartcl.account_alert_wear"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature android:name="android.hardware.type.watch"/>
 
@@ -37,6 +38,8 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name="android.support.wearable.activity.ConfirmationActivity"/>
+
         <service android:name=".DiscoverBeaconsService">
         </service>
 
@@ -50,7 +53,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AccountHistoryActivity"
+            android:name=".AccountStatesDetailedActivity"
             android:allowEmbedded="true"
             android:exported="true"
             android:label="@string/title_activity_notification"
@@ -68,13 +71,18 @@
         </service>
 
         <activity
-            android:name=".CurrentAccountActivity"
+            android:name=".AccountStatesOverviewActivity"
             android:allowEmbedded="true"
             android:exported="true"
             android:label="@string/title_activity_current_account"
             android:taskAffinity=""
             android:theme="@android:style/Theme.DeviceDefault.Light">
         </activity>
+
+        <service
+            android:name="com.smartcl.communicationlibrary.LCLAppIntentService"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>

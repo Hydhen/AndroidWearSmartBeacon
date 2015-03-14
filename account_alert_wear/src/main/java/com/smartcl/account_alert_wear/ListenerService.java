@@ -37,14 +37,22 @@ public class ListenerService extends BaseListenerService {
     private void accountsGotten(MessageEvent messageEvent) {
         JSONObject json = extractJsonFromMessage(messageEvent);
 
-        // TODO: check format
-        showToast(messageEvent.getPath());
+        showToast("accounts gotten");
 
+        // TODO: get this message from json object gotten.
         final String mockMessage =
-                "{ \"current_account\" : { \"money\" : 41000, \"state\" : \"red\", \"date\" : \"26/02/2015\" }, \"previsions\" : [" +
+                "{ \"accounts\" : [" +
+                        "{ \"name\" : \"me\", \"account\" : [" +
                         "{ \"money\" : 90000, \"state\" : \"green\", \"date\" : \"01/03/2015\" }," +
-                        "{ \"money\" : 56000, \"state\" : \"orange\", \"date\" : \"15/03/2015\" }," +
-                        "{ \"money\" : 30000, \"state\" : \"red\", \"date\" : \"01/04/2015\" }] }";
+                        "{ \"money\" : 50000, \"state\" : \"yellow\", \"date\" : \"15/03/2015\" }," +
+                        "{ \"money\" : 30000, \"state\" : \"red\", \"date\" : \"01/04/2015\" }" +
+                        "]}," +
+                        "{ \"name\" : \"son\", \"account\" : [" +
+                        "{ \"money\" : 9000, \"state\" : \"red\", \"date\" : \"01/03/2015\" }," +
+                        "{ \"money\" : 5000, \"state\" : \"green\", \"date\" : \"15/03/2015\" }," +
+                        "{ \"money\" : 3000, \"state\" : \"red\", \"date\" : \"01/04/2015\" }" +
+                        "]}" +
+                        "]}";
         JSONObject jsonMocked = (JSONObject) JSONValue.parse(mockMessage);
 
         NotificationsTrigger.TriggerNotification(this, jsonMocked);

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
+import com.smartcl.communicationlibrary.LCLAppIntentService;
 import com.smartcl.communicationlibrary.LCLPreferences;
 
 /**
@@ -20,9 +21,9 @@ public class NotificationsTrigger {
     public static void TriggerNotification(Context packageContext, String question) {
         Notification questionNotif = buildQuestionNotification(packageContext, question);
 
-        Intent websiteIntent = new Intent(packageContext, WebsiteIntentService.class);
-        PendingIntent websitePendingIntent = PendingIntent
-                .getService(packageContext, 0, websiteIntent, 0);
+        Intent appIntent = new Intent(packageContext, LCLAppIntentService.class);
+        PendingIntent appPendingIntent = PendingIntent
+                .getService(packageContext, 0, appIntent, 0);
 
         Notification notification =
                 new NotificationCompat.Builder(packageContext)
@@ -32,8 +33,8 @@ public class NotificationsTrigger {
                                 packageContext.getString(R.string.content_activity_notif),
                                 LCLPreferences.GetNameUser(packageContext)))
                         .addAction(R.drawable.icon_ad,
-                                   packageContext.getString(R.string.open_lcl_website_title),
-                                   websitePendingIntent)
+                                   packageContext.getString(R.string.open_app),
+                                   appPendingIntent)
                         .extend(new NotificationCompat.WearableExtender().addPage(questionNotif))
                         .setVibrate(new long[]{500, 500})
                         .build();

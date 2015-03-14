@@ -3,21 +3,23 @@ package com.smartcl.account_alert_wear;
 import java.io.Serializable;
 
 /**
- * Created by bourdi_b on 25/02/2015.
+ * Represent the bank account of a user.
  */
 public class Account implements Serializable {
     private Long _money;
     private eState _state;
     private String _date;
+    private String _name;
 
-    public Account(Long money, String state, String date) {
+    public Account(Long money, String state, String date, String name) {
         _money = money;
         _date = date;
+        _name = name;
         switch (state) {
             case "red":
                 _state = eState.RED;
                 break;
-            case "orange":
+            case "yellow":
                 _state = eState.YELLOW;
                 break;
             case "green":
@@ -41,14 +43,30 @@ public class Account implements Serializable {
         return _date;
     }
 
-    public int getStateImageResource() {
+    public String getName() {
+        return _name;
+    }
+
+    public int getDetailedStateImageResource() {
         switch (getState()) {
             case RED:
-                return R.drawable.red;
+                return R.drawable.red_account;
             case YELLOW:
-                return R.drawable.yellow;
+                return R.drawable.yellow_account;
             case GREEN:
-                return R.drawable.green;
+                return R.drawable.green_account;
+        }
+        return 0;
+    }
+
+    public int getOverviewStateImageResource() {
+        switch (getState()) {
+            case RED:
+                return R.drawable.red_circle;
+            case YELLOW:
+                return R.drawable.yellow_circle;
+            case GREEN:
+                return R.drawable.green_circle;
         }
         return 0;
     }

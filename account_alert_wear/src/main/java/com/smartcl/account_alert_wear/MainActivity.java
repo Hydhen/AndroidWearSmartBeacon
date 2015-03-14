@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 
 /**
@@ -56,7 +55,6 @@ public class MainActivity extends Activity {
         for (ActivityManager.RunningServiceInfo service : manager
                 .getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
-                Toast.makeText(this, "Service is running", Toast.LENGTH_SHORT).show();
                 return true;
             }
         }

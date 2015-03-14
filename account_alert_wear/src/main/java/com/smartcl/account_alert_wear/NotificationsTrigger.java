@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
+import com.smartcl.communicationlibrary.LCLAppIntentService;
 import com.smartcl.communicationlibrary.LCLPreferences;
 
 import org.json.simple.JSONObject;
@@ -21,8 +22,12 @@ public class NotificationsTrigger {
 
     public static void TriggerNotification(Context packageContext, JSONObject accountsJson) {
         Notification accountNotif = buildAccountNotification(packageContext, accountsJson);
-        PendingIntent accountHistoryIntent = buildAccountHistoryIntent(packageContext,
-                                                                       accountsJson);
+        PendingIntent accountHistoryIntent = buildAccountPrevisionIntent(packageContext,
+                                                                         accountsJson);
+
+        Intent appIntent = new Intent(packageContext, LCLAppIntentService.class);
+        PendingIntent appPendingIntent = PendingIntent
+                .getService(packageContext, 0, appIntent, 0);
 
         Notification notification =
                 new NotificationCompat.Builder(packageContext)
@@ -35,6 +40,9 @@ public class NotificationsTrigger {
                         .addAction(R.drawable.icon_bank,
                                    packageContext.getString(R.string.account_previsions),
                                    accountHistoryIntent)
+                        .addAction(R.drawable.icon_bank,
+                                   packageContext.getString(R.string.open_app),
+                                   appPendingIntent)
                         .setVibrate(new long[]{500, 500})
                         .build();
 
@@ -46,7 +54,7 @@ public class NotificationsTrigger {
 
     private static Notification buildAccountNotification(Context packageContext,
                                                          JSONObject accountsJson) {
-        Intent accountIntent = new Intent(packageContext, CurrentAccountActivity.class);
+        Intent accountIntent = new Intent(packageContext, AccountStatesOverviewActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("account_data", accountsJson.toJSONString());
         accountIntent.putExtras(bundle);
@@ -66,9 +74,9 @@ public class NotificationsTrigger {
         return notificationAccounts;
     }
 
-    private static PendingIntent buildAccountHistoryIntent(Context packageContext,
-                                                           JSONObject accountsJson) {
-        Intent accountIntent = new Intent(packageContext, AccountHistoryActivity.class);
+    private static PendingIntent buildAccountPrevisionIntent(Context packageContext,
+                                                             JSONObject accountsJson) {
+        Intent accountIntent = new Intent(packageContext, AccountStatesDetailedActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("account_data", accountsJson.toJSONString());
         accountIntent.putExtras(bundle);

@@ -1,23 +1,18 @@
-package com.smartcl.androidwearsmartbeacon;
+package com.smartcl.communicationlibrary;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.wearable.activity.ConfirmationActivity;
 
-import com.smartcl.communicationlibrary.MessageSender;
-
 import org.json.simple.JSONObject;
 
-/**
- * Open a website from the wearable to the handheld.
- */
-public class WebsiteIntentService extends IntentService {
+public class LCLAppIntentService extends IntentService {
 
-    private static final String WEBSITE_OPEN_PATH = "/website/open/lcl/";
+    private static final String WEBSITE_OPEN_PATH = "/app/open/lcl/";
     private MessageSender _messageSender = null;
 
-    public WebsiteIntentService() {
-        super("WebsiteIntentService");
+    public LCLAppIntentService() {
+        super("LCLAppIntentService");
     }
 
     @Override
@@ -32,7 +27,7 @@ public class WebsiteIntentService extends IntentService {
 
         _messageSender = new MessageSender(getApplicationContext());
         JSONObject json = new JSONObject();
-        json.put("path", "https://particuliers.secure.lcl.fr/index.html");
+        json.put("details", "fr.lcl.android.customerarea");
         _messageSender.sendMessage(WEBSITE_OPEN_PATH, json);
     }
 

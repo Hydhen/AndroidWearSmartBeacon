@@ -33,8 +33,9 @@ public class CustomAccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         final Account account = (Account) getArguments().getSerializable("account");
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.activity_current_account, container, false);
-        final WatchViewStub stub = (WatchViewStub) view.findViewById(R.id.watch_view_stub);
+        View view = inflater.inflate(R.layout.fragment_custom_account, container, false);
+        final WatchViewStub stub = (WatchViewStub) view
+                .findViewById(R.id.watch_view_stub_custom_fragment);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
@@ -45,12 +46,14 @@ public class CustomAccountFragment extends Fragment {
     }
 
     private void setupWidgets(WatchViewStub stub, Account account) {
+        TextView name = (TextView) stub.findViewById(R.id.nameUser);
+        name.setText(account.getName());
         TextView moneyLabel = (TextView) stub.findViewById(R.id.money_label);
         moneyLabel.setText(String.valueOf(account.getMoney()));
         TextView dateLabel = (TextView) stub.findViewById(R.id.date);
         dateLabel.setText(account.getDate());
         ImageView img = (ImageView) stub.findViewById(R.id.img);
-        img.setImageResource(account.getStateImageResource());
+        img.setImageResource(account.getDetailedStateImageResource());
     }
 
 }

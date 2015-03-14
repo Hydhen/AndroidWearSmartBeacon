@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.wearable.view.WatchViewStub
-    android:id="@+id/watch_view_stub"
+    android:id="@+id/watch_view_stub_custom_fragment"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:rectLayout="@layout/rect_activity_current_account"
-    app:roundLayout="@layout/round_activity_current_account"
-    tools:context="com.smartcl.account_alert_wear.CurrentAccountActivity"
+    app:rectLayout="@layout/rect_account_page_grid"
+    app:roundLayout="@layout/round_account_page_grid"
+    tools:context="com.smartcl.account_alert_wear.CustomAccountFragment"
     tools:deviceIds="wear">
 </android.support.wearable.view.WatchViewStub>

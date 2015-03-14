@@ -8,38 +8,34 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.wearable.view.FragmentGridPagerAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by bourdi_b on 25/02/2015.
+ * Implementation of the 2D picker pattern.
  */
 public class AccountPagerAdapter extends FragmentGridPagerAdapter {
 
-    private final List<AccountPage> _pages;
+    private final List<List<Account>> _accounts;
     private Context _context;
 
-    public AccountPagerAdapter(Context context, FragmentManager fm, List<Account> accounts) {
+    public AccountPagerAdapter(Context context, FragmentManager fm, List<List<Account>> accounts) {
         super(fm);
         _context = context;
-        _pages = new ArrayList(accounts.size());
-        for (Account account : accounts) {
-            _pages.add(new AccountPage(account));
-        }
+        _accounts = accounts;
     }
 
     // Obtain the UI fragment at the specified position
     @Override
-    public Fragment getFragment(int row, int col) {
-        AccountPage page = _pages.get(row);
-        CustomAccountFragment card = CustomAccountFragment.newInstance(page.getAccount());
+    public Fragment getFragment(int row, int column) {
+        Account accountToDisplay = _accounts.get(row).get(column);
+        CustomAccountFragment card = CustomAccountFragment.newInstance(accountToDisplay);
         return card;
     }
 
     @Override
     public Drawable getBackgroundForPage(int row, int column) {
-        AccountPage page = _pages.get(row);
-        switch (page.getAccount().getState()) {
+        Account accountToDisplay = _accounts.get(row).get(column);
+        switch (accountToDisplay.getState()) {
             case RED:
                 return new GradientDrawable(GradientDrawable.Orientation.TL_BR,
                                             new int[]{0xFFFF0000, 0xFFFFFFFF});
@@ -55,12 +51,14 @@ public class AccountPagerAdapter extends FragmentGridPagerAdapter {
 
     @Override
     public int getRowCount() {
-        return _pages.size();
+        return _accounts.size();
     }
 
-    // Obtain the number of pages (horizontal)
     @Override
     public int getColumnCount(int rowNum) {
-        return 1;
+        if (getRowCount() <= 0) {
+            return 0;
+        }
+        return _accounts.get(0).size();
     }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.smartcl.account_alert_mobile"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          android:sharedUserId="com.smartcl">
+<manifest
+    package="com.smartcl.account_alert_mobile"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:sharedUserId="com.smartcl">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 

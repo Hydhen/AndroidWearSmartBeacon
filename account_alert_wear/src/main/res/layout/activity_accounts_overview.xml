@@ -6,8 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:rectLayout="@layout/rect_activity_account_history"
-    app:roundLayout="@layout/round_activity_account_history"
-    tools:context="com.smartcl.account_alert_wear.AccountHistoryActivity"
+    app:rectLayout="@layout/rect_activity_accounts_overview"
+    app:roundLayout="@layout/round_activity_accounts_overview"
+    tools:context="com.smartcl.account_alert_wear.AccountStatesOverviewActivity"
     tools:deviceIds="wear">
 </android.support.wearable.view.WatchViewStub>
