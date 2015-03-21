@@ -6,12 +6,12 @@ import java.io.Serializable;
  * Represent the bank account of a user.
  */
 public class Account implements Serializable {
-    private Long _money;
+    private Double _money;
     private eState _state;
     private String _date;
     private String _name;
 
-    public Account(Long money, String state, String date, String name) {
+    public Account(Double money, String state, String date, String name) {
         _money = money;
         _date = date;
         _name = name;
@@ -31,7 +31,7 @@ public class Account implements Serializable {
         }
     }
 
-    public Long getMoney() {
+    public Double getMoney() {
         return _money;
     }
 

@@ -37,20 +37,18 @@ public class ListenerService extends BaseListenerService {
     private void accountsGotten(MessageEvent messageEvent) {
        // JSONObject json = extractJsonFromMessage(messageEvent);
 
-        showToast("accounts gotten");
-
         // TODO: get this message from json object gotten.
         final String mockMessage =
                 "{ \"accounts\" : [" +
-                        "{ \"name\" : \"me\", \"account\" : [" +
-                        "{ \"money\" : 90000, \"state\" : \"green\", \"date\" : \"01/03/2015\" }," +
-                        "{ \"money\" : 50000, \"state\" : \"yellow\", \"date\" : \"15/03/2015\" }," +
-                        "{ \"money\" : 30000, \"state\" : \"red\", \"date\" : \"01/04/2015\" }" +
+                        "{ \"name\" : \"moi\", \"account\" : [" +
+                        "{ \"money\" : 10000.31, \"state\" : \"green\", \"date\" : \"01/03/2015\" }," +
+                        "{ \"money\" : 5300.84, \"state\" : \"yellow\", \"date\" : \"15/03/2015\" }," +
+                        "{ \"money\" : -250.56, \"state\" : \"red\", \"date\" : \"01/04/2015\" }" +
                         "]}," +
-                        "{ \"name\" : \"son\", \"account\" : [" +
-                        "{ \"money\" : 9000, \"state\" : \"red\", \"date\" : \"01/03/2015\" }," +
-                        "{ \"money\" : 5000, \"state\" : \"green\", \"date\" : \"15/03/2015\" }," +
-                        "{ \"money\" : 3000, \"state\" : \"red\", \"date\" : \"01/04/2015\" }" +
+                        "{ \"name\" : \"mon fils\", \"account\" : [" +
+                        "{ \"money\" : -1025.95, \"state\" : \"red\", \"date\" : \"01/03/2015\" }," +
+                        "{ \"money\" : 2098.74, \"state\" : \"green\", \"date\" : \"15/03/2015\" }," +
+                        "{ \"money\" : -3.56, \"state\" : \"red\", \"date\" : \"01/04/2015\" }" +
                         "]}" +
                         "]}";
         JSONObject jsonMocked = (JSONObject) JSONValue.parse(mockMessage);
@@ -59,7 +57,6 @@ public class ListenerService extends BaseListenerService {
     }
 
     private void preferencesGotten(MessageEvent messageEvent) {
-        showToast("prefs gotten");
         byte[] data = messageEvent.getData();
         Map<String, ?> map = LCLPreferences.GetDeserialized(data);
         LCLPreferences.WritePreferences(this, map);

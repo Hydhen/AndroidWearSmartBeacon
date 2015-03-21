@@ -78,7 +78,7 @@ public class AccountStatesOverviewActivity extends Activity {
                 final JSONObject jsonMoney = (JSONObject) moneyEntity;
                 final String date = (String) jsonMoney.get("date");
                 final String state = (String) jsonMoney.get("state");
-                final Long money = (Long) jsonMoney.get("money");
+                final Double money = (Double) jsonMoney.get("money");
                 accountsStates.add(new Account(money, state, date, name));
             }
             accounts.add(accountsStates);

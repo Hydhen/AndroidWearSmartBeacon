@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 public class CustomAccountFragment extends Fragment {
 
     /**
@@ -53,7 +56,14 @@ public class CustomAccountFragment extends Fragment {
         TextView name = (TextView) stub.findViewById(R.id.nameUser);
         name.setText(account.getName());
         TextView moneyLabel = (TextView) stub.findViewById(R.id.money_label);
-        moneyLabel.setText(String.valueOf(account.getMoney()));
+
+        final Double money = account.getMoney();
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator(' ');
+        DecimalFormat format = new DecimalFormat("#,###.00", symbols);
+
+        moneyLabel.setText(format.format(money));
+
         TextView dateLabel = (TextView) stub.findViewById(R.id.date);
         dateLabel.setText(account.getDate());
         ImageView img = (ImageView) stub.findViewById(R.id.img);
