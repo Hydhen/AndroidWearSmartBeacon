@@ -35,7 +35,7 @@ public class ListenerService extends BaseListenerService {
     }
 
     private void accountsGotten(MessageEvent messageEvent) {
-        JSONObject json = extractJsonFromMessage(messageEvent);
+       // JSONObject json = extractJsonFromMessage(messageEvent);
 
         showToast("accounts gotten");
 
@@ -63,5 +63,11 @@ public class ListenerService extends BaseListenerService {
         byte[] data = messageEvent.getData();
         Map<String, ?> map = LCLPreferences.GetDeserialized(data);
         LCLPreferences.WritePreferences(this, map);
+
+        // TODO: this is a biiiig cheat.
+        // The problem is when I get the preferences, the message for accounts is lost !
+        // Since the server connection will not be done, we can cheat like this...
+        // FIXME: Find a fix for message loses.
+        accountsGotten(messageEvent);
     }
 }

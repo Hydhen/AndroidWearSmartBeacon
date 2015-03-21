@@ -17,13 +17,15 @@ public class CustomAccountFragment extends Fragment {
      * @param account The account to display.
      * @return The instance of CustomAccountFragment.
      */
-    public static CustomAccountFragment newInstance(Account account) {
+    public static CustomAccountFragment newInstance(Account account, boolean hasBottomNeighboor, boolean hasNextNeighboor) {
         CustomAccountFragment fragment = new CustomAccountFragment();
         Bundle bundle = fragment.getArguments();
         if (bundle == null) {
             bundle = new Bundle();
         }
         bundle.putSerializable("account", account);
+        bundle.putBoolean("hasBottomNeighboor", hasBottomNeighboor);
+        bundle.putBoolean("hasNextNeighboor", hasNextNeighboor);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -32,6 +34,8 @@ public class CustomAccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final Account account = (Account) getArguments().getSerializable("account");
+        final boolean hasBottomNeighboor = getArguments().getBoolean("hasBottomNeighboor");
+        final boolean hasNextNeighboor = getArguments().getBoolean("hasNextNeighboor");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_custom_account, container, false);
         final WatchViewStub stub = (WatchViewStub) view
@@ -39,13 +43,13 @@ public class CustomAccountFragment extends Fragment {
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                setupWidgets(stub, account);
+                setupWidgets(stub, account, hasBottomNeighboor, hasNextNeighboor);
             }
         });
         return view;
     }
 
-    private void setupWidgets(WatchViewStub stub, Account account) {
+    private void setupWidgets(WatchViewStub stub, Account account, boolean hasBottomNeighboor, boolean hasNextNeighboor) {
         TextView name = (TextView) stub.findViewById(R.id.nameUser);
         name.setText(account.getName());
         TextView moneyLabel = (TextView) stub.findViewById(R.id.money_label);
@@ -54,6 +58,15 @@ public class CustomAccountFragment extends Fragment {
         dateLabel.setText(account.getDate());
         ImageView img = (ImageView) stub.findViewById(R.id.img);
         img.setImageResource(account.getDetailedStateImageResource());
+
+        View arrowHori = stub.findViewById(R.id.arrow_hori);
+        if (hasNextNeighboor == false) {
+            arrowHori.setVisibility(View.INVISIBLE);
+        }
+        View arrowVert = stub.findViewById(R.id.arrow_vert);
+        if (hasBottomNeighboor == false) {
+            arrowVert.setVisibility(View.INVISIBLE);
+        }
     }
 
 }

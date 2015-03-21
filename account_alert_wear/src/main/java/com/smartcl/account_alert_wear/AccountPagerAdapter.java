@@ -28,25 +28,8 @@ public class AccountPagerAdapter extends FragmentGridPagerAdapter {
     @Override
     public Fragment getFragment(int row, int column) {
         Account accountToDisplay = _accounts.get(row).get(column);
-        CustomAccountFragment card = CustomAccountFragment.newInstance(accountToDisplay);
+        CustomAccountFragment card = CustomAccountFragment.newInstance(accountToDisplay, row < _accounts.size() - 1, column < _accounts.get(row).size() - 1);
         return card;
-    }
-
-    @Override
-    public Drawable getBackgroundForPage(int row, int column) {
-        Account accountToDisplay = _accounts.get(row).get(column);
-        switch (accountToDisplay.getState()) {
-            case RED:
-                return new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-                                            new int[]{0xFFFF0000, 0xFFFFFFFF});
-            case YELLOW:
-                return new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-                                            new int[]{0xFFFFFF00, 0xFFFFFFFF});
-            case GREEN:
-                return new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-                                            new int[]{0xFF00FF00, 0xFFFFFFFF});
-        }
-        return new ColorDrawable();
     }
 
     @Override

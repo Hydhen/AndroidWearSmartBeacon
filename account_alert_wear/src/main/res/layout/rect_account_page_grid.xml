@@ -6,48 +6,110 @@
               android:orientation="vertical"
               tools:deviceIds="wear_square">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/nameUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Name"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="18dp"
         android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:gravity="center_horizontal"/>
 
-        <TextView
-            android:id="@+id/nameUser"
+    <Space
+        android:layout_width="20px"
+        android:layout_height="15px"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="20px"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
-            android:textAppearance="?android:attr/textAppearanceSmall"/>
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/money_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="10000"
+                android:textSize="25dp"
+                android:textStyle="italic"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/at_date"
+                android:id="@+id/textView5"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="current"
+                android:textAlignment="center"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/arrow_hori"
+            android:src="@android:drawable/arrow_down_float"
+            android:rotation="-90"
+            android:layout_weight="0.005"/>
+    </LinearLayout>
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
+        >
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:minWidth="25dp"/>
+            android:layout_weight="1"/>
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="77dp"
+            android:layout_height="62dp"
+            android:src="@drawable/icon_bank"
             android:layout_gravity="center_horizontal"
-            android:text="current"
-            android:textAlignment="center"
-            />
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/arrow_vert"
+            android:src="@android:drawable/arrow_down_float"
+            android:layout_gravity="bottom"
+            android:layout_weight="0.0005"/>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="match_parent"
-        android:layout_height="105dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.26"
-        android:src="@drawable/icon_bank"/>
-
-    <TextView
-        android:id="@+id/money_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:text="0"
-        android:textSize="18dp"
-        android:textStyle="italic"/>
 </LinearLayout>

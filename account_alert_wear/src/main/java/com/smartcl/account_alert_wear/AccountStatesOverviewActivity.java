@@ -62,7 +62,7 @@ public class AccountStatesOverviewActivity extends Activity {
                 ImageView lastState = (ImageView) lineAccount.findViewById(R.id.last_state);
                 lastState.setImageResource(accountStates.get(2).getOverviewStateImageResource());
             }
-            mainLayout.addView(lineAccount);
+            mainLayout.addView(lineAccount, mainLayout.getChildCount() - 1);
         }
     }
 

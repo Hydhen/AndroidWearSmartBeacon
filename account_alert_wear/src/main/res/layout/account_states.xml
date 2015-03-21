@@ -4,46 +4,49 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="center_horizontal"
+        android:text="Benjamin"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="16dp"/>
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Benjamin"
-            android:textAppearance="?android:attr/textAppearanceSmall"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="3"
+        >
 
         <ImageView
             android:id="@+id/current_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/yellow_circle"/>
+            android:layout_weight="1"
+            android:src="@drawable/yellow_circle"
+            />
 
         <ImageView
             android:id="@+id/mid_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:src="@drawable/green_circle"/>
 
         <ImageView
             android:id="@+id/last_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:src="@drawable/red_circle"/>
 
     </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="20dp"/>
 
 
 </LinearLayout>
