@@ -7,6 +7,10 @@ import com.smartcl.communicationlibrary.LCLPreferences;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 
@@ -37,18 +41,30 @@ public class ListenerService extends BaseListenerService {
     private void accountsGotten(MessageEvent messageEvent) {
        // JSONObject json = extractJsonFromMessage(messageEvent);
 
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        final String currentDate = dateFormat.format(cal.getTime());
+
+        cal.setTime(new Date());
+        cal.add(Calendar.DATE, 5);
+        final String date5Days = dateFormat.format(cal.getTime());
+
+        cal.setTime(new Date());
+        cal.add(Calendar.DATE, 10);
+        final String date10Days = dateFormat.format(cal.getTime());
+
         // TODO: get this message from json object gotten.
         final String mockMessage =
                 "{ \"accounts\" : [" +
-                        "{ \"name\" : \"moi\", \"account\" : [" +
-                        "{ \"money\" : 10000.31, \"state\" : \"green\", \"date\" : \"01/03/2015\" }," +
-                        "{ \"money\" : 5300.84, \"state\" : \"yellow\", \"date\" : \"15/03/2015\" }," +
-                        "{ \"money\" : -250.56, \"state\" : \"red\", \"date\" : \"01/04/2015\" }" +
+                        "{ \"name\" : \"Mon compte courant\", \"account\" : [" +
+                        "{ \"money\" : 10000.31, \"state\" : \"green\", \"date\" : \"" + currentDate + "\" }," +
+                        "{ \"money\" : 5300.84, \"state\" : \"yellow\", \"date\" : \"" + date5Days + "\" }," +
+                        "{ \"money\" : -250.56, \"state\" : \"red\", \"date\" : \"" + date10Days + "\" }" +
                         "]}," +
-                        "{ \"name\" : \"mon fils\", \"account\" : [" +
-                        "{ \"money\" : -1025.95, \"state\" : \"red\", \"date\" : \"01/03/2015\" }," +
-                        "{ \"money\" : 2098.74, \"state\" : \"green\", \"date\" : \"15/03/2015\" }," +
-                        "{ \"money\" : -3.56, \"state\" : \"red\", \"date\" : \"01/04/2015\" }" +
+                        "{ \"name\" : \"Mon fils\", \"account\" : [" +
+                        "{ \"money\" : -1025.95, \"state\" : \"red\", \"date\" : \"" + currentDate + "\" }," +
+                        "{ \"money\" : 2098.74, \"state\" : \"green\", \"date\" : \"" + date5Days + "\" }," +
+                        "{ \"money\" : -3.56, \"state\" : \"red\", \"date\" : \"" + date10Days + "\" }" +
                         "]}" +
                         "]}";
         JSONObject jsonMocked = (JSONObject) JSONValue.parse(mockMessage);

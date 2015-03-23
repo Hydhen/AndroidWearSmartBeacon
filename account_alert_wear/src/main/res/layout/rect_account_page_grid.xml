@@ -6,8 +6,34 @@
               android:orientation="vertical"
               tools:deviceIds="wear_square">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/top_account_overview">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@drawable/icon_lcl"
+            />
+
+        <TextView
+            android:id="@+id/account_summary_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_overview_title"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_weight="1"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            android:gravity="right"/>
+
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/nameUser"
+        android:id="@+id/name_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
@@ -17,71 +43,48 @@
         android:gravity="center_horizontal"/>
 
     <Space
-        android:layout_width="20px"
-        android:layout_height="15px"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        >
+        android:layout_gravity="center_horizontal">
 
-        <Space
-            android:layout_width="20px"
-            android:layout_height="20px"
-            android:layout_weight="1"/>
-
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="10000"
+            android:id="@+id/money_label"
+            android:layout_weight="1"
+            android:textSize="18dp"/>
 
-            <TextView
-                android:id="@+id/money_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="10000"
-                android:textSize="25dp"
-                android:textStyle="italic"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/at_date"
+            android:id="@+id/textView7"
+            android:layout_weight="1"
+            android:textSize="18dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/at_date"
-                android:id="@+id/textView5"
-                android:layout_gravity="center_horizontal"/>
-
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="current"
-                android:textAlignment="center"
-                android:textSize="20dp"/>
-
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/arrow_hori"
-            android:src="@android:drawable/arrow_down_float"
-            android:rotation="-90"
-            android:layout_weight="0.005"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="current"
+            android:id="@+id/date"
+            android:layout_weight="1"
+            android:textSize="18dp"/>
     </LinearLayout>
 
     <Space
-        android:layout_width="20px"
-        android:layout_height="20px"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -90,26 +93,28 @@
         android:layout_gravity="center_horizontal"
         >
 
-        <Space
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/arrow_left"
+            android:layout_weight="1"
+            android:src="@drawable/arrow"/>
 
         <ImageView
-            android:id="@+id/img"
-            android:layout_width="77dp"
-            android:layout_height="62dp"
+            android:id="@+id/state_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/icon_bank"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"/>
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/arrow_vert"
-            android:src="@android:drawable/arrow_down_float"
-            android:layout_gravity="bottom"
-            android:layout_weight="0.0005"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/arrow_right"
+            android:layout_weight="1"
+            android:src="@drawable/arrow"/>
+
     </LinearLayout>
 
 </LinearLayout>

@@ -28,7 +28,7 @@ public class AccountPagerAdapter extends FragmentGridPagerAdapter {
     @Override
     public Fragment getFragment(int row, int column) {
         Account accountToDisplay = _accounts.get(row).get(column);
-        CustomAccountFragment card = CustomAccountFragment.newInstance(accountToDisplay, row < _accounts.size() - 1, column < _accounts.get(row).size() - 1);
+        CustomAccountFragment card = CustomAccountFragment.newInstance(accountToDisplay, row, _accounts.size(), column, _accounts.get(row).size());
         return card;
     }
 

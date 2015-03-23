@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="question"
-        android:textAlignment="center"
-        />
+        android:textColor="@color/blue_instit"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/thanks"
@@ -25,6 +25,7 @@
         android:gravity="center_horizontal"
         android:text="@string/thanks_question"
         android:textColor="#FF0000FF"
+        android:textSize="13dp"
         android:visibility="gone"/>
 
     <LinearLayout
@@ -36,24 +37,27 @@
         android:orientation="horizontal"
         >
 
-        <ImageButton
-            android:id="@+id/button_yes"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@null"
-            android:paddingRight="10dp"
-            android:src="@drawable/yes"/>
 
-        <ImageButton
-            android:id="@+id/button_no"
-            style="?android:attr/buttonStyleSmall"
+        <Button
+            android:id="@+id/button_yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:paddingLeft="10dp"
-            android:src="@drawable/no"/>
+            android:background="@drawable/rect_button_yes"
+            android:text="@string/yes"
+            android:layout_weight="1"/>
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            />
+
+        <Button
+            android:id="@+id/button_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_button_no"
+            android:text="@string/no"
+            android:layout_weight="1"/>
 
     </LinearLayout>
 

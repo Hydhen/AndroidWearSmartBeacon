@@ -20,15 +20,17 @@ public class CustomAccountFragment extends Fragment {
      * @param account The account to display.
      * @return The instance of CustomAccountFragment.
      */
-    public static CustomAccountFragment newInstance(Account account, boolean hasBottomNeighboor, boolean hasNextNeighboor) {
+    public static CustomAccountFragment newInstance(Account account, int row, int nbRows, int column, int nbColumns) {
         CustomAccountFragment fragment = new CustomAccountFragment();
         Bundle bundle = fragment.getArguments();
         if (bundle == null) {
             bundle = new Bundle();
         }
         bundle.putSerializable("account", account);
-        bundle.putBoolean("hasBottomNeighboor", hasBottomNeighboor);
-        bundle.putBoolean("hasNextNeighboor", hasNextNeighboor);
+        bundle.putBoolean("hasBottomNeighboor", row < nbRows - 1);
+        bundle.putBoolean("hasAboveNeighboor", row > 0);
+        bundle.putBoolean("hasLeftNeighboor", column > 0);
+        bundle.putBoolean("hasRightNeighboor", column < nbColumns - 1);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -38,7 +40,10 @@ public class CustomAccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         final Account account = (Account) getArguments().getSerializable("account");
         final boolean hasBottomNeighboor = getArguments().getBoolean("hasBottomNeighboor");
-        final boolean hasNextNeighboor = getArguments().getBoolean("hasNextNeighboor");
+        final boolean hasAboveNeighboor = getArguments().getBoolean("hasAboveNeighboor");
+        final boolean hasLeftNeighboor = getArguments().getBoolean("hasLeftNeighboor");
+        final boolean hasRightNeighboor = getArguments().getBoolean("hasRightNeighboor");
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_custom_account, container, false);
         final WatchViewStub stub = (WatchViewStub) view
@@ -46,14 +51,15 @@ public class CustomAccountFragment extends Fragment {
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                setupWidgets(stub, account, hasBottomNeighboor, hasNextNeighboor);
+                setupWidgets(stub, account, hasBottomNeighboor, hasAboveNeighboor, hasLeftNeighboor, hasRightNeighboor);
             }
         });
         return view;
     }
 
-    private void setupWidgets(WatchViewStub stub, Account account, boolean hasBottomNeighboor, boolean hasNextNeighboor) {
-        TextView name = (TextView) stub.findViewById(R.id.nameUser);
+    private void setupWidgets(WatchViewStub stub, Account account, boolean hasBottomNeighboor, boolean hasAboveNeighboor,
+                              boolean hasLeftNeighboor, boolean hasRightNeighboor) {
+        TextView name = (TextView) stub.findViewById(R.id.name_user);
         name.setText(account.getName());
         TextView moneyLabel = (TextView) stub.findViewById(R.id.money_label);
 
@@ -62,20 +68,41 @@ public class CustomAccountFragment extends Fragment {
         symbols.setGroupingSeparator(' ');
         DecimalFormat format = new DecimalFormat("#,###.00", symbols);
 
-        moneyLabel.setText(format.format(money));
+        moneyLabel.setText(format.format(money) + " €");
 
         TextView dateLabel = (TextView) stub.findViewById(R.id.date);
         dateLabel.setText(account.getDate());
-        ImageView img = (ImageView) stub.findViewById(R.id.img);
+        ImageView img = (ImageView) stub.findViewById(R.id.state_account);
         img.setImageResource(account.getDetailedStateImageResource());
 
-        View arrowHori = stub.findViewById(R.id.arrow_hori);
-        if (hasNextNeighboor == false) {
-            arrowHori.setVisibility(View.INVISIBLE);
+        View leftArrow = stub.findViewById(R.id.arrow_left);
+        View rightArrow = stub.findViewById(R.id.arrow_right);
+
+        boolean left = false;
+        boolean right = false;
+
+        if (hasLeftNeighboor == true) {
+            leftArrow.setRotation(0);
+            left = true;
         }
-        View arrowVert = stub.findViewById(R.id.arrow_vert);
-        if (hasBottomNeighboor == false) {
-            arrowVert.setVisibility(View.INVISIBLE);
+        if (hasRightNeighboor == true) {
+            rightArrow.setRotation(180);
+            right = true;
+        }
+
+        if (left == false) {
+            if (hasAboveNeighboor == true) {
+                leftArrow.setRotation(90);
+            } else if (hasBottomNeighboor == true) {
+                leftArrow.setRotation(-90);
+            }
+        }
+        else if (right == false) {
+            if (hasAboveNeighboor == true) {
+                rightArrow.setRotation(90);
+            } else if (hasBottomNeighboor == true) {
+                rightArrow.setRotation(-90);
+            }
         }
     }
 

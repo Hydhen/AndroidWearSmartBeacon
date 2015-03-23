@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Space;
 import android.widget.TextView;
 
 import org.json.simple.JSONArray;
@@ -41,14 +44,20 @@ public class AccountStatesOverviewActivity extends Activity {
     private void setupWidgets(WatchViewStub stub, JSONObject accountsInformation) {
         List<List<Account>> accounts = createAccountsFromJson(accountsInformation);
 
-        LinearLayout mainLayout = (LinearLayout) stub
+        RelativeLayout mainLayout = (RelativeLayout) stub
                 .findViewById(R.id.main_layout_accounts_detailed);
         LayoutInflater inflater = (LayoutInflater) getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
 
+        int id_below = R.id.space_top_account;
+
         for (List<Account> accountStates : accounts) {
             View lineAccount = inflater.inflate(R.layout.account_states, null);
             TextView nameView = (TextView) lineAccount.findViewById(R.id.name);
+
+            int id = View.generateViewId();
+            lineAccount.setId(id);
+
             if (accountStates.size() >= 1) {
                 Account firstState = accountStates.get(0);
                 nameView.setText(firstState.getName());
@@ -62,7 +71,15 @@ public class AccountStatesOverviewActivity extends Activity {
                 ImageView lastState = (ImageView) lineAccount.findViewById(R.id.last_state);
                 lastState.setImageResource(accountStates.get(2).getOverviewStateImageResource());
             }
-            mainLayout.addView(lineAccount, mainLayout.getChildCount() - 1);
+
+            RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                                                            ViewGroup.LayoutParams.WRAP_CONTENT);
+            p.addRule(RelativeLayout.BELOW, id_below);
+            p.addRule(RelativeLayout.CENTER_HORIZONTAL);
+            lineAccount.setLayoutParams(p);
+
+            mainLayout.addView(lineAccount);
+            id_below = lineAccount.getId();
         }
     }
 

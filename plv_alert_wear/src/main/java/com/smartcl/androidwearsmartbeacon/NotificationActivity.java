@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -34,10 +35,10 @@ public class NotificationActivity extends Activity {
         });
     }
 
-    private void disableWidgets(final WatchViewStub stub) {
-        ImageButton btYes = (ImageButton) stub.findViewById(R.id.button_yes);
-        ImageButton btNo = (ImageButton) stub.findViewById(R.id.button_no);
-        TextView setText = (TextView) stub.findViewById(R.id.thanks);
+    private void disableWidgets(final WatchViewStub stub, boolean answer) {
+        Button btYes = (Button) stub.findViewById(R.id.button_yes);
+        Button btNo = (Button) stub.findViewById(R.id.button_no);
+        TextView labelAnswer = (TextView) stub.findViewById(R.id.thanks);
 
         btYes.setEnabled(false);
         btNo.setEnabled(false);
@@ -45,7 +46,10 @@ public class NotificationActivity extends Activity {
         btNo.setVisibility(View.INVISIBLE);
         btYes.setVisibility(View.INVISIBLE);
 
-        setText.setVisibility(View.VISIBLE);
+        if (answer == false) {
+            labelAnswer.setText(getString(R.string.thanks_question_no));
+        }
+        labelAnswer.setVisibility(View.VISIBLE);
     }
 
     private void setupWidgets(final WatchViewStub stub) {
@@ -56,20 +60,20 @@ public class NotificationActivity extends Activity {
         questiontext.setText(question);
         _messageSender = new MessageSender(NotificationActivity.this);
 
-        final ImageButton btYes = (ImageButton) stub.findViewById(R.id.button_yes);
-        final ImageButton btNo = (ImageButton) stub.findViewById(R.id.button_no);
+        final Button btYes = (Button) stub.findViewById(R.id.button_yes);
+        final Button btNo = (Button) stub.findViewById(R.id.button_no);
         btYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendAnswer("Yes", stub);
-                disableWidgets(stub);
+                disableWidgets(stub, true);
             }
         });
         btNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendAnswer("No", stub);
-                disableWidgets(stub);
+                disableWidgets(stub, false);
             }
         });
     }
