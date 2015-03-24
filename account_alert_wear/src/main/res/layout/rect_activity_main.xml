@@ -5,75 +5,82 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               tools:context="com.smartcl.account_alert_wear.MainActivity"
+              android:background="@color/white"
               tools:deviceIds="wear_square">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center|center_horizontal"
-        android:text="@string/welcome"
-        android:textAlignment="center"
-        android:textSize="13sp"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center|center_horizontal"
-        android:text="@string/text_info"
-        android:textAlignment="center"
-        android:textSize="12.5dp"/>
-
-    <Button
-        android:id="@+id/start_stop_service"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:text="@string/stop_service"/>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_weight="0"
-        android:gravity="bottom|center_horizontal"
-        android:orientation="horizontal"
-        >
-
-        <ImageView
-            android:id="@+id/image_lcl"
-            style="?android:attr/buttonStyleSmall"
+        <TextView
+            android:id="@+id/text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:src="@drawable/icon_lcl"
-            />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center|center_horizontal"
+            android:text="@string/welcome"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textColor="@color/blue_instit"
+            android:textStyle="bold"/>
 
-        <ImageView
-            android:id="@+id/image_epitech"
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|center_horizontal"
+            android:text="@string/text_info"
+            android:textColor="@color/blue_instit"
+            android:textAlignment="center"
+            android:textSize="12.5dp"/>
+
+        <Button
+            android:id="@+id/start_stop_service"
             style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:background="@color/grey_metal"
+            android:textColor="@color/white"
+            android:text="@string/stop_service"/>
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:src="@drawable/epitech"
-            />
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_weight="0"
+            android:gravity="bottom|center_horizontal"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            >
 
-        <ImageView
-            android:id="@+id/image_smartbeacon"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:src="@drawable/smartbeacon"
-            />
+            <ImageView
+                android:id="@+id/image_lcl"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:src="@drawable/icon_lcl"
+                />
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/image_epitech"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:src="@drawable/epitech"
+                />
+
+            <ImageView
+                android:id="@+id/image_smartbeacon"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:src="@drawable/smartbeacon"
+                />
+
+        </LinearLayout>
+
 </LinearLayout>

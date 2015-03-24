@@ -30,7 +30,7 @@
             android:text="@string/account_overview_title"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_weight="1"
-            android:textColor="@color/blue"
+            android:textColor="@color/blue_instit"
             android:textStyle="bold"
             android:gravity="right"/>
 
@@ -61,6 +61,7 @@
             android:layout_weight="1"
             android:id="@+id/textView2"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:gravity="center_horizontal"/>
 
         <TextView
@@ -69,6 +70,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="J+5"
             android:layout_weight="1"
+            android:textColor="@color/white"
             android:id="@+id/textView3"
             android:textAlignment="center"
             android:layout_gravity="center_vertical"
@@ -79,6 +81,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="J+10"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:id="@+id/textView4"
             android:gravity="center_horizontal"/>

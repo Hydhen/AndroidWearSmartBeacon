@@ -40,7 +40,7 @@ public class NotificationsTrigger {
                         .addAction(R.drawable.icon_bank,
                                    packageContext.getString(R.string.account_previsions),
                                    accountHistoryIntent)
-                        .addAction(R.drawable.icon_bank,
+                        .addAction(R.drawable.icon_lcl,
                                    packageContext.getString(R.string.open_app),
                                    appPendingIntent)
                         .setVibrate(new long[]{500, 500})

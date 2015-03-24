@@ -32,7 +32,7 @@ public class NotificationsTrigger {
                         .setContentText(String.format(
                                 packageContext.getString(R.string.content_activity_notif),
                                 LCLPreferences.GetNameUser(packageContext)))
-                        .addAction(R.drawable.icon_ad,
+                        .addAction(R.drawable.icon_lcl,
                                    packageContext.getString(R.string.open_app),
                                    appPendingIntent)
                         .extend(new NotificationCompat.WearableExtender().addPage(questionNotif))
