@@ -183,7 +183,7 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
             _messageSender.sendMessage(GET_PREFERENCES);
         }
         for (SBBeacon beacon : sbBeacons) {
-            Toast.makeText(this, "Beacon enter", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Beacon enter", Toast.LENGTH_SHORT).show();
             _timerThreads.queueBeacon(this, _messageSender, beacon);
         }
     }
@@ -192,7 +192,7 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
     public void onExitedBeacons(List<SBBeacon> sbBeacons) {
         for (SBBeacon beacon : sbBeacons) {
             _timerThreads.unqueueBeacon(this, beacon);
-            Toast.makeText(this, "Beacon exit", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Beacon exit", Toast.LENGTH_SHORT).show();
         }
     }
 

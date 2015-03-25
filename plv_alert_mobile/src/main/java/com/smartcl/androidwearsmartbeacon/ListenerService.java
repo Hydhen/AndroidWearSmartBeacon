@@ -45,7 +45,7 @@ public class ListenerService extends BaseListenerService {
                 getPreferences(messageEvent);
                 break;
             default:
-                showToast("Unknown message:" + path);
+                //showToast("Unknown message:" + path);
                 break;
         }
     }
@@ -126,7 +126,7 @@ public class ListenerService extends BaseListenerService {
 
             // If not for this use case.
             if ("PLV_Alert".toLowerCase().compareTo(usecase.toLowerCase()) != 0) {
-                showToast("not a plv alert:" + usecase);
+                //showToast("not a plv alert:" + usecase);
                 return;
             }
 
@@ -162,7 +162,7 @@ public class ListenerService extends BaseListenerService {
 
             // If not the correct profile.
             if (status.compareTo(_profileExpected) != 0) {
-                showToast("not a " + _profileExpected);
+                //showToast("not a " + _profileExpected);
                 return;
             }
 

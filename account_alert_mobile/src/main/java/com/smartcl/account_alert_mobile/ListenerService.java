@@ -25,7 +25,6 @@ public class ListenerService extends BaseListenerService {
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
-        showToast("message");
         final String path = messageEvent.getPath();
         switch (path) {
             case BEACON_ENTERED_PATH:
@@ -38,7 +37,7 @@ public class ListenerService extends BaseListenerService {
                 openApp(messageEvent);
                 break;
             default:
-                showToast("Unknown message:" + path);
+                //showToast("Unknown message:" + path);
                 break;
         }
     }
@@ -49,7 +48,6 @@ public class ListenerService extends BaseListenerService {
         final long minor = (long) json.get("minor");
 
         final String message = messageEvent.getPath() + "Major[" + major + "]Minor[" + minor + "]";
-        showToast(message);
 
         JSONObject jsonToSend = new JSONObject();
         //TODO: make network request and send data.
@@ -58,7 +56,6 @@ public class ListenerService extends BaseListenerService {
     }
 
     private void getPreferences(MessageEvent messageEvent) {
-        showToast("Get preferences");
         byte[] preferencesSerialized = getPreferencesSerialized(messageEvent);
         if (preferencesSerialized != null) {
             _messageSender.sendMessage(SEND_PREFERENCES_PATH, preferencesSerialized);

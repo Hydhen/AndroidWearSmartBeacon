@@ -77,14 +77,14 @@ public class DiscoverBeaconsService extends Service implements SBLocationManager
         for (SBBeacon beacon : sbBeacons) {
             JSONObject json = buildJsonObjectFromBeacon(beacon);
             _messageSender.sendMessage(BEACON_ENTERED_PATH, json);
-            Toast.makeText(this, "Beacon enter", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Beacon enter", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onExitedBeacons(List<SBBeacon> sbBeacons) {
         for (SBBeacon beacon : sbBeacons) {
-            Toast.makeText(this, "Beacon exit", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Beacon exit", Toast.LENGTH_SHORT).show();
         }
     }
 

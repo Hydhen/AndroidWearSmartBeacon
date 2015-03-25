@@ -33,7 +33,7 @@ public class ListenerService extends BaseListenerService {
                 preferencesGotten(messageEvent);
                 break;
             default:
-                showToast("Unknown message:" + path);
+                //showToast("Unknown message:" + path);
                 break;
         }
     }
@@ -57,14 +57,14 @@ public class ListenerService extends BaseListenerService {
         final String mockMessage =
                 "{ \"accounts\" : [" +
                         "{ \"name\" : \"Mon compte courant\", \"account\" : [" +
-                        "{ \"money\" : 10000.31, \"state\" : \"green\", \"date\" : \"" + currentDate + "\" }," +
-                        "{ \"money\" : 5300.84, \"state\" : \"yellow\", \"date\" : \"" + date5Days + "\" }," +
-                        "{ \"money\" : -250.56, \"state\" : \"red\", \"date\" : \"" + date10Days + "\" }" +
+                        "{ \"money\" : 436.0, \"state\" : \"green\", \"date\" : \"" + currentDate + "\" }," +
+                        "{ \"money\" : 36.0, \"state\" : \"yellow\", \"date\" : \"" + date5Days + "\" }," +
+                        "{ \"money\" : 2036.0, \"state\" : \"green\", \"date\" : \"" + date10Days + "\" }" +
                         "]}," +
                         "{ \"name\" : \"Mon fils\", \"account\" : [" +
-                        "{ \"money\" : -1025.95, \"state\" : \"red\", \"date\" : \"" + currentDate + "\" }," +
-                        "{ \"money\" : 2098.74, \"state\" : \"green\", \"date\" : \"" + date5Days + "\" }," +
-                        "{ \"money\" : -3.56, \"state\" : \"red\", \"date\" : \"" + date10Days + "\" }" +
+                        "{ \"money\" : 150.0, \"state\" : \"green\", \"date\" : \"" + currentDate + "\" }," +
+                        "{ \"money\" : 50.0, \"state\" : \"yellow\", \"date\" : \"" + date5Days + "\" }," +
+                        "{ \"money\" : -20.0, \"state\" : \"red\", \"date\" : \"" + date10Days + "\" }" +
                         "]}" +
                         "]}";
         JSONObject jsonMocked = (JSONObject) JSONValue.parse(mockMessage);

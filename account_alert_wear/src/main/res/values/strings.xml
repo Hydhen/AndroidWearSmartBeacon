@@ -12,7 +12,7 @@
     <string name="at_date">le</string>
 
     <string name="account_previsions">Aperçu détaillé des comptes</string>
-    <string name="account_notif_title">Title</string>
+    <string name="account_notif_title">Notification</string>
     <string name="account_notif_content">Bonjour %s, consultez vos comptes LCL.</string>
 
 </resources>
