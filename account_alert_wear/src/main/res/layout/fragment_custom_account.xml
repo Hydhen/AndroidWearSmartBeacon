@@ -7,6 +7,6 @@
     android:layout_height="match_parent"
     app:rectLayout="@layout/rect_account_page_grid"
     app:roundLayout="@layout/round_account_page_grid"
-    tools:context="com.smartcl.account_alert_wear.CustomAccountFragment"
+    tools:context="com.smartcl.accountAlert.CustomAccountFragment"
     tools:deviceIds="wear">
 </android.support.wearable.view.WatchViewStub>

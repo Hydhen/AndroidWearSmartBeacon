@@ -1,4 +1,4 @@
-package com.smartcl.account_alert_mobile;
+package com.smartcl.accountAlert;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

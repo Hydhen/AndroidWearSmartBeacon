@@ -9,9 +9,25 @@
 
     <TextView
         android:id="@+id/text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center|center_horizontal"
+        android:text="@string/welcome"
+        android:textAlignment="center"
+        android:textSize="13sp"
+        android:textColor="@color/blue_instit"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/welcome"/>
+        android:gravity="center|center_horizontal"
+        android:text="@string/text_info"
+        android:textColor="@color/blue_instit"
+        android:textAlignment="center"
+        android:textSize="12.5dp"/>
 
     <Button
         android:id="@+id/start_stop_service"
@@ -19,6 +35,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:background="@color/grey_metal"
+        android:textColor="@color/white"
         android:text="@string/stop_service"/>
 
     <LinearLayout
@@ -28,6 +47,7 @@
         android:layout_weight="0"
         android:gravity="bottom|center_horizontal"
         android:orientation="horizontal"
+        android:background="@color/white"
         >
 
         <ImageView
@@ -36,7 +56,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
+            android:background="@color/white"
             android:src="@drawable/icon_lcl"
             />
 
@@ -46,7 +66,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
+            android:background="@color/white"
             android:src="@drawable/epitech"
             />
 
@@ -56,7 +76,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
+            android:background="@color/white"
             android:src="@drawable/smartbeacon"
             />
 

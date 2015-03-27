@@ -1,4 +1,4 @@
-package com.smartcl.account_alert_mobile;
+package com.smartcl.accountAlert;
 
 import android.content.Intent;
 import android.net.Uri;

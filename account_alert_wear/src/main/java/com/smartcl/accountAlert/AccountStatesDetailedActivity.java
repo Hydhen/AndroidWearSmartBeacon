@@ -1,4 +1,4 @@
-package com.smartcl.account_alert_wear;
+package com.smartcl.accountAlert;
 
 import android.app.Activity;
 import android.os.Bundle;

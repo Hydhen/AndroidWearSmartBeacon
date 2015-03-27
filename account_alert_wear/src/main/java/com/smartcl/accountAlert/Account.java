@@ -1,4 +1,4 @@
-package com.smartcl.account_alert_wear;
+package com.smartcl.accountAlert;
 
 import java.io.Serializable;
 

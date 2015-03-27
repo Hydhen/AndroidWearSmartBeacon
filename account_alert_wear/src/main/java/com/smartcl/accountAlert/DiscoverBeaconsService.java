@@ -1,9 +1,8 @@
-package com.smartcl.account_alert_wear;
+package com.smartcl.accountAlert;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.widget.Toast;
 
 import com.smartcl.communicationlibrary.MessageSender;
 

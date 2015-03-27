@@ -3,14 +3,83 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="com.smartcl.account_alert_wear.AccountStatesOverviewActivity"
+                tools:context="com.smartcl.accountAlert.AccountStatesOverviewActivity"
                 tools:deviceIds="wear_round">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/account_overview_title"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:id="@+id/top_account_overview">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@drawable/icon_lcl"
+            />
+
+        <TextView
+            android:id="@+id/account_summary_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_overview_title"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_weight="1"
+            android:textColor="@color/blue_instit"
+            android:textStyle="bold"
+            android:gravity="right"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15px"
+        android:layout_below="@+id/top_account_overview"
+        android:id="@+id/space_top_account"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:gravity="bottom"
+        android:background="@drawable/background_account_summary"
+        android:id="@+id/layout_bottom_summary"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="J"
+            android:layout_weight="1"
+            android:id="@+id/textView2"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="J+5"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:id="@+id/textView3"
+            android:textAlignment="center"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="J+10"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:id="@+id/textView4"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
 </RelativeLayout>

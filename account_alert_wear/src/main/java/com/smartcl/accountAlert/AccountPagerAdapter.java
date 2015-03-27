@@ -1,11 +1,8 @@
-package com.smartcl.account_alert_wear;
+package com.smartcl.accountAlert;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.support.wearable.view.FragmentGridPagerAdapter;
 
 import java.util.List;

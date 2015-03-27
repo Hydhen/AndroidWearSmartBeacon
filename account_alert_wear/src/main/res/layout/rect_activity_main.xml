@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="com.smartcl.account_alert_wear.MainActivity"
+              tools:context="com.smartcl.accountAlert.MainActivity"
               android:background="@color/white"
               tools:deviceIds="wear_square">
 
