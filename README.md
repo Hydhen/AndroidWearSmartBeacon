@@ -1,6 +1,6 @@
 # AndroidWearSmartBeacon
 
-This is a project made in collaboration with LCL (French bank) and SmartBeacon (company which builds devices related to iBeacons technologie).
+This is a project made in collaboration with LCL (French bank) and SmartBeacon (company which builds devices related to iBeacons technology).
 
 This project consists of :
 * a sub-project composed of:
