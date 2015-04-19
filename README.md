@@ -24,3 +24,20 @@ It also displays the accounts of the whole family.
 ### BeaconSetter:
 
 A configuration application which defines the server's url, the current username, the beacons to detect, etc...
+
+### Screenshots PLV_alert
+![screen1](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/PLV_alert/screen1.png)
+![screen2](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/PLV_alert/screen2.png)
+![screen3](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/PLV_alert/screen3.png)
+![screen4](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/PLV_alert/screen4.png)
+![screen5](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/PLV_alert/screen5.png)
+
+### Screenshots Account_alert
+![screen1](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/Account_alert/screen1.png)
+![screen2](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/Account_alert/screen2.png)
+![screen3](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/Account_alert/screen3.png)
+![screen4](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/Account_alert/screen4.png)
+![screen5](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/Account_alert/screen5.png)
+![screen6](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/Account_alert/screen6.png)
+![screen7](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/Account_alert/screen7.png)
+![screen8](https://github.com/bourdibay/AndroidWearSmartBeacon/blob/master/screenshots/Account_alert/screen8.png)
