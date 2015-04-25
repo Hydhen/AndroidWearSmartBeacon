@@ -26,7 +26,7 @@ public class ChangeAPIUrlActivity extends ActionBarActivity {
 
     public void setUrl(View view) {
         SharedPreferences settings = getSharedPreferences("LclSmartbeaconPrefs", MODE_MULTI_PROCESS);
-        settings.edit().putString("api_url", "http://ec2-54-93-111-136.eu-central-1.compute.amazonaws.com:21996/").apply();//NewUrlTextField.getText().toString()).apply();
+        settings.edit().putString("api_url", NewUrlTextField.getText().toString()).apply();
         CurrentUrlTextView.setText("Current Url : " + NewUrlTextField.getText().toString());
         Toast.makeText(this, "Url Set", Toast.LENGTH_SHORT).show();
     }
